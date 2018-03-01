@@ -62,6 +62,16 @@ return array(
                 'maxitems'=>1
             )
         ),
+        'tablemapping' => array(
+            'exclude' => false,
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping',
+            'config' => array(
+                'type' => 'inline',
+                'foreign_table' => 'tx_samlauthentication_domain_model_tablemapping',
+                'foreign_field' => 'serviceprovider',
+                'foreign_label' => 'table',
+            )
+        ),
         'hidden' => array(
             'exclude' => true,
             'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
@@ -86,7 +96,7 @@ return array(
         '0' => array(
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    title,type,prefix,context,
+                    title,type,prefix,context,tablemapping,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     '
