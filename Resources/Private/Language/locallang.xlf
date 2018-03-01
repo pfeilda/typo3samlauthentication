@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2011-10-18T18:20:51Z" product-name="my-ext">
+        <header/>
+        <body>
+            <trans-unit id="fieldMapping" xml:space="preserve">
+                <source>Field mapping</source>
+            </trans-unit>
+            <trans-unit id="serviceProvider" xml:space="preserve">
+                <source>Service provider</source>
+            </trans-unit>
+            <trans-unit id="serviceProvider.title" xml:space="preserve">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="serviceProvider.type" xml:space="preserve">
+                <source>Typ</source>
+            </trans-unit>
+            <trans-unit id="serviceProvider.prefix" xml:space="preserve">
+                <source>Prefix</source>
+            </trans-unit>
+            <trans-unit id="serviceProvider.context" xml:space="preserve">
+                <source>Context</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

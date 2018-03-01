@@ -1,0 +1,21 @@
+{
+  "name": "daniel-pfeil/samlauthentication",
+  "type": "typo3-cms-extension",
+  "description": "This extension adds a authentication method for SAML with different service provider.",
+  "keywords":[
+    "TYPO3",
+    "SAML",
+    "SSO",
+    "authentication",
+    "shibboleth"
+  ],
+  "version":"0.0.1",
+  "require":{
+    "typo3/cms-core": ">=8.6.0"
+  },
+  "autoload":{
+    "psr-4":{
+      "DanielPfeil\\Samlauthentication":"Classes/"
+    }
+  }
+}
