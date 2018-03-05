@@ -24,6 +24,9 @@
             <trans-unit id="serviceProvider.title" xml:space="preserve">
                 <source>Title</source>
             </trans-unit>
+            <trans-unit id="serviceProvider.identityprovider" xml:space="preserve">
+                <source>Identityprovider</source>
+            </trans-unit>
             <trans-unit id="serviceProvider.type" xml:space="preserve">
                 <source>Typ</source>
             </trans-unit>

@@ -23,6 +23,14 @@ return array(
                 'eval' => 'trim,required,alphanum'
             )
         ),
+        'identityprovider' => array(
+            'exclude' => false,
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.identityprovider',
+            'config' => array(
+                'type' => 'input',
+                'eval' => 'trim,required'
+            )
+        ),
         'destinationpid' => array(
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.destinationpid',
             'config' => array(
@@ -113,7 +121,7 @@ return array(
         '0' => array(
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    title,type,prefix,context,tablemapping,destinationpid,
+                    title,type,identityprovider,prefix,context,tablemapping,destinationpid,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     '

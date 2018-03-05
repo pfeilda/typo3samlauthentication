@@ -4,35 +4,30 @@ namespace DanielPfeil\Samlauthentication\Service;
 use DanielPfeil\Samlauthentication\Enum\AuthenticationStatus;
 use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 {
     public function getUser()
     {
-        /** @var DatabaseConnection $tes */
-        $tes = $GLOBALS["TYPO3_DB"];
-        DebuggerUtility::var_dump($tes->);
-        DebuggerUtility::var_dump(parent::getUser());
+        $queryBuilderServiceProviders = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_samlauthentication_domain_model_serviceprovider');
+        //start extract to own function
+        $test = $queryBuilderServiceProviders->select("*")->from('tx_samlauthentication_domain_model_serviceprovider')->execute();
+        DebuggerUtility::var_dump($test->fetchAll());
+        DebuggerUtility::var_dump($GLOBALS["TSFE"]);
+        //end extract to own function
+
         $user = parent::getUser();
         if(!$user){
             try{
-                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-
                 $samlComponent = FactoryUtility::getSAMLUtility();
                 $samlUserData = $samlComponent->getUserData();
-                //is working
-                $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_user');
-                DebuggerUtility::var_dump($queryBuilder
-                    ->insert('fe_users')
+
+
+                $queryBuilderFeUsers = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_user');
+                $queryBuilderFeUsers->insert('fe_users')
                     ->values([
                         'username' => $samlUserData["uid"],
                         'password' => \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance(NULL)->getHashedPassword('123'),
@@ -40,14 +35,15 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
                         'tstamp' => time(),
                         'usergroup' => '1'
                     ])
-                    ->execute());
+                    ->execute();
+
                 $user = parent::getUser();
             } catch(\Exception $exception){
+                //TODO implement
                 DebuggerUtility::var_dump($exception);
             }
         }
-//        $user = unserialize('a:36:{s:3:"uid";i:4;s:15:"tx_extbase_type";s:1:"0";s:3:"pid";i:2;s:6:"tstamp";i:1518785602;s:8:"username";s:6:"admin2";s:8:"password";s:34:"$P$C5tJlzDAHa6hno9T1cr75mvpfDUShu/";s:9:"usergroup";s:1:"1";s:7:"disable";i:0;s:9:"starttime";i:0;s:7:"endtime";i:0;s:4:"name";s:0:"";s:10:"first_name";s:0:"";s:11:"middle_name";s:0:"";s:9:"last_name";s:0:"";s:7:"address";s:0:"";s:9:"telephone";s:0:"";s:3:"fax";s:0:"";s:5:"email";s:0:"";s:6:"crdate";i:1518785602;s:9:"cruser_id";i:1;s:12:"lockToDomain";s:0:"";s:7:"deleted";i:0;s:11:"description";N;s:2:"uc";N;s:5:"title";s:0:"";s:3:"zip";s:0:"";s:4:"city";s:0:"";s:7:"country";s:0:"";s:3:"www";s:0:"";s:7:"company";s:0:"";s:5:"image";N;s:8:"TSconfig";s:0:"";s:9:"lastlogin";i:1519851136;s:9:"is_online";i:1519851136;s:19:"felogin_redirectPid";s:0:"";s:18:"felogin_forgotHash";s:0:"";}');
-        DebuggerUtility::var_dump($user);
+
         return $user;
     }
 
@@ -56,9 +52,7 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
         //todo make configurable what SAML is to use
         $samlComponent = FactoryUtility::getSAMLUtility();
         $samlUserData = $samlComponent->getUserData();
-//        DebuggerUtility::var_dump($user);
-        DebuggerUtility::var_dump($samlUserData);
-        DebuggerUtility::var_dump($user);
+
         if ($samlUserData["uid"] == $user["username"]) {
             return AuthenticationStatus::SUCCESS_BREAK;
         }
