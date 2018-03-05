@@ -1,9 +1,8 @@
 <?php
-
 return array(
     'ctrl' => array(
-        'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping',
-        'label' => 'table',
+        'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
+        'label' => 'field',
         'iconfile' => '',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -27,22 +26,20 @@ return array(
                 )
             )
         ),
-        'table' => array(
+        'field' => array(
             'exclude' => false,
-            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping.table',
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.field',
             'config' => array(
                 'type' => 'input',
                 'eval' => 'trim,required'
             )
         ),
-        'fields' => array(
+        'foreignfield' => array(
             'exclude' => false,
-            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.foreignfield',
             'config' => array(
-                'type' => 'inline',
-                'foreign_table' => 'tx_samlauthentication_domain_model_fieldmapping',
-                'foreign_field' => 'table',
-                'foreign_label' => 'field',
+                'type' => 'input',
+                'eval' => 'trim,required'
             )
         ),
     ),
@@ -57,7 +54,7 @@ return array(
         '0' => array(
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    table,fields,
+                    field,foreignfield,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     '

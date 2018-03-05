@@ -23,6 +23,23 @@ return array(
                 'eval' => 'trim,required,alphanum'
             )
         ),
+        'destinationpid' => array(
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.destinationpid',
+            'config' => array(
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'pages',
+                'size' => '1',
+                'maxitems' => '1',
+                'minitems' => '0',
+                'show_thumbs' => '1',
+                'wizards' => array(
+                    'suggest' => array(
+                        'type' => 'suggest'
+                    )
+                )
+            ),
+        ),
         'type' => array(
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.type',
@@ -33,8 +50,8 @@ return array(
                     ['Apache2 Shibboleth SP', 1],
                     ['OpenSAML', 2]
                 ],
-                'minitems'=>1,
-                'maxitems'=>1
+                'minitems' => 1,
+                'maxitems' => 1
             ),
             'onChange' => 'reload'
         ),
@@ -58,8 +75,8 @@ return array(
                     ['Backend', 2],
                     ['Backend and Frontend', 3]
                 ],
-                'minitems'=>1,
-                'maxitems'=>1
+                'minitems' => 1,
+                'maxitems' => 1
             )
         ),
         'tablemapping' => array(
@@ -96,7 +113,7 @@ return array(
         '0' => array(
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    title,type,prefix,context,tablemapping,
+                    title,type,prefix,context,tablemapping,destinationpid,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     '

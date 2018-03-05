@@ -4,6 +4,7 @@ namespace DanielPfeil\Samlauthentication\Service;
 use DanielPfeil\Samlauthentication\Enum\AuthenticationStatus;
 use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
@@ -17,7 +18,9 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 {
     public function getUser()
     {
-        DebuggerUtility::var_dump($this->login);
+        /** @var DatabaseConnection $tes */
+        $tes = $GLOBALS["TYPO3_DB"];
+        DebuggerUtility::var_dump($tes->);
         DebuggerUtility::var_dump(parent::getUser());
         $user = parent::getUser();
         if(!$user){
