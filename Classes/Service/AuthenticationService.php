@@ -12,12 +12,7 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 {
     public function getUser()
     {
-        $queryBuilderServiceProviders = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_samlauthentication_domain_model_serviceprovider');
-        //start extract to own function
-        $test = $queryBuilderServiceProviders->select("*")->from('tx_samlauthentication_domain_model_serviceprovider')->execute();
-        DebuggerUtility::var_dump($test->fetchAll());
-        DebuggerUtility::var_dump($GLOBALS["TSFE"]);
-        //end extract to own function
+        DebuggerUtility::var_dump(FactoryUtility::getServiceProviders());
 
         $user = parent::getUser();
         if(!$user){

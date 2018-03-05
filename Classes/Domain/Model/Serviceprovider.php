@@ -32,6 +32,11 @@ class Serviceprovider extends AbstractEntity
      */
     private $tablemapping = null;
 
+    public function __construct()
+    {
+        $this->setTablemapping(new ObjectStorage());
+    }
+
     /**
      * @return bool
      */

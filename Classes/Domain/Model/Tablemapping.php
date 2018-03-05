@@ -22,6 +22,11 @@ class Tablemapping
      */
     private $fields;
 
+    public function __construct()
+    {
+        $this->setFields(new ObjectStorage());
+    }
+
     /**
      * @return bool
      */
