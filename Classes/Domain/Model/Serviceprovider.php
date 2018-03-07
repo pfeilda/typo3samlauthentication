@@ -5,36 +5,54 @@ namespace DanielPfeil\Samlauthentication\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
+//todo add aditional fields defined in tables.sql
 class Serviceprovider extends AbstractEntity
 {
     /**
      * @var bool
      */
-    private $hidden = false;
+    protected $hidden = false;
     /**
      * @var string
      */
-    private $title = "";
+    protected $title = "";
     /**
      * @var string
      */
-    private $identityprovider = "";
+    protected $identityprovider = "";
     /**
      * @var int
      */
-    private $destinationpid = -1;
+    protected $destinationpid = -1;
+    /**
+     * @var integer
+     */
+    protected $type = 1;
+    /**
+     * @var integer
+     */
+    protected $context = 0;
     /**
      * @var string
      */
-    private $prefix = "";
+    protected $prefix = "";
     /**
      * @var ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Tablemapping>
      */
-    private $tablemapping = null;
+    protected $tablemapping = null;
 
     public function __construct()
     {
         $this->setTablemapping(new ObjectStorage());
+    }
+
+    /**
+     * @param int $uid
+     */
+    public function setUid(int $uid){
+        if (!$this->uid) {
+            $this->uid = $uid;
+        }
     }
 
     /**
@@ -99,6 +117,38 @@ class Serviceprovider extends AbstractEntity
     public function setDestinationpid(int $destinationpid): void
     {
         $this->destinationpid = $destinationpid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType(int $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return int
+     */
+    public function getContext(): int
+    {
+        return $this->context;
+    }
+
+    /**
+     * @param int $context
+     */
+    public function setContext(int $context): void
+    {
+        $this->context = $context;
     }
 
     /**

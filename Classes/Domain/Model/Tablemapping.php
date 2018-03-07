@@ -3,28 +3,38 @@
 
 namespace DanielPfeil\Samlauthentication\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Tablemapping
+class Tablemapping extends AbstractEntity
 {
     /**
      * @var bool
      */
-    private $hidden = false;
+    protected $hidden = false;
 
     /**
      * @var string
      */
-    private $table = '';
+    protected $table = '';
 
     /**
      * @var ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping>
      */
-    private $fields;
+    protected $fields;
 
     public function __construct()
     {
         $this->setFields(new ObjectStorage());
+    }
+
+    /**
+     * @param int $uid
+     */
+    public function setUid(int $uid){
+        if (!$this->uid) {
+            $this->uid = $uid;
+        }
     }
 
     /**

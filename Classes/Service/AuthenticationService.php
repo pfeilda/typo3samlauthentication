@@ -13,13 +13,13 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
     public function getUser()
     {
         DebuggerUtility::var_dump(FactoryUtility::getServiceProviders());
+        DebuggerUtility::var_dump(FactoryUtility::getServiceProviders());
 
         $user = parent::getUser();
         if(!$user){
             try{
                 $samlComponent = FactoryUtility::getSAMLUtility();
                 $samlUserData = $samlComponent->getUserData();
-
 
                 $queryBuilderFeUsers = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_user');
                 $queryBuilderFeUsers->insert('fe_users')

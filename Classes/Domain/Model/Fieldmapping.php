@@ -10,15 +10,24 @@ class Fieldmapping extends AbstractEntity
     /**
      * @var bool
      */
-    private $hidden = false;
+    protected $hidden = false;
     /**
      * @var string
      */
-    private $field = "";
+    protected $field = "";
     /**
      * @var string
      */
-    private $foreignfield = "";
+    protected $foreignfield = "";
+
+    /**
+     * @param int $uid
+     */
+    public function setUid(int $uid){
+        if (!$this->uid) {
+            $this->uid = $uid;
+        }
+    }
 
     /**
      * @return bool
