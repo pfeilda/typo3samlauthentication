@@ -48,7 +48,7 @@ class Tablemapping extends AbstractEntity
     /**
      * @param bool $hidden
      */
-    public function setHidden(bool $hidden): void
+    public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
     }
@@ -64,7 +64,7 @@ class Tablemapping extends AbstractEntity
     /**
      * @param string $table
      */
-    public function setTable(string $table): void
+    public function setTable(string $table)
     {
         $this->table = $table;
     }
@@ -80,7 +80,7 @@ class Tablemapping extends AbstractEntity
     /**
      * @param ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping> $fields
      */
-    public function setFields(ObjectStorage $fields): void
+    public function setFields(ObjectStorage $fields)
     {
         $this->fields = $fields;
     }

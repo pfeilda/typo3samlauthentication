@@ -26,6 +26,7 @@ class Fieldmapping extends AbstractEntity
     public function setUid(int $uid){
         if (!$this->uid) {
             $this->uid = $uid;
+            $this->uid = $uid;
         }
     }
 
@@ -40,7 +41,7 @@ class Fieldmapping extends AbstractEntity
     /**
      * @param bool $hidden
      */
-    public function setHidden(bool $hidden): void
+    public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
     }
@@ -56,7 +57,7 @@ class Fieldmapping extends AbstractEntity
     /**
      * @param string $field
      */
-    public function setField(string $field): void
+    public function setField(string $field)
     {
         $this->field = $field;
     }
@@ -72,7 +73,7 @@ class Fieldmapping extends AbstractEntity
     /**
      * @param string $foreignfield
      */
-    public function setForeignfield(string $foreignfield): void
+    public function setForeignfield(string $foreignfield)
     {
         $this->foreignfield = $foreignfield;
     }

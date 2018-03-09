@@ -66,7 +66,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param bool $hidden
      */
-    public function setHidden(bool $hidden): void
+    public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
     }
@@ -82,7 +82,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param string $title
      */
-    public function setTitle(string $title): void
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -98,7 +98,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param string $identityprovider
      */
-    public function setIdentityprovider(string $identityprovider): void
+    public function setIdentityprovider(string $identityprovider)
     {
         $this->identityprovider = $identityprovider;
     }
@@ -114,7 +114,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param int $destinationpid
      */
-    public function setDestinationpid(int $destinationpid): void
+    public function setDestinationpid(int $destinationpid)
     {
         $this->destinationpid = $destinationpid;
     }
@@ -130,7 +130,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param int $type
      */
-    public function setType(int $type): void
+    public function setType(int $type)
     {
         $this->type = $type;
     }
@@ -146,7 +146,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param int $context
      */
-    public function setContext(int $context): void
+    public function setContext(int $context)
     {
         $this->context = $context;
     }
@@ -162,7 +162,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param string $prefix
      */
-    public function setPrefix(string $prefix): void
+    public function setPrefix(string $prefix)
     {
         $this->prefix = $prefix;
     }
@@ -178,7 +178,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Tablemapping> $tablemapping
      */
-    public function setTablemapping(ObjectStorage $tablemapping): void
+    public function setTablemapping(ObjectStorage $tablemapping)
     {
         $this->tablemapping = $tablemapping;
     }

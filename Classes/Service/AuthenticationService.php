@@ -16,6 +16,9 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
         DebuggerUtility::var_dump(FactoryUtility::getServiceProviders());
 
         $user = parent::getUser();
+        DebuggerUtility::var_dump($this->login);
+        DebuggerUtility::var_dump($user);
+        DebuggerUtility::var_dump($_SERVER);
         if(!$user){
             try{
                 $samlComponent = FactoryUtility::getSAMLUtility();
