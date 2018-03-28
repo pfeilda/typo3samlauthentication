@@ -47,6 +47,7 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 
     public function authUser(array $user)
     {
+        DebuggerUtility::var_dump("first");
         //todo make configurable what SAML is to use
         $samlComponent = FactoryUtility::getSAMLUtility();
         $samlUserData = $samlComponent->getUserData();

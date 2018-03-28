@@ -30,8 +30,8 @@ return array(
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.field',
             'config' => array(
-                'type' => 'input',
-                'eval' => 'trim,required'
+                'type' => 'select',
+                'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getFields'
             )
         ),
         'foreignfield' => array(

@@ -33,7 +33,7 @@ class ApacheSamlUtility implements SamlUtility
          ***************************/
         if ((bool)FactoryUtility::getExtensionConfiguration()['debugMode']) {
             return [
-                "uid" => "admin3",
+                "uid" => "admin5",
                 "displayName" => "Daniel Pfeil",
                 "givenName" => "Daniel",
                 "sureName" => "Pfeil"

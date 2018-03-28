@@ -10,12 +10,10 @@ namespace DanielPfeil\Samlauthentication\Utility;
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
 use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
-use Doctrine\DBAL\Driver\Mysqli\MysqliStatement;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 abstract class FactoryUtility
 {
@@ -99,6 +97,24 @@ abstract class FactoryUtility
 
         $tableMappingsArray = $queryBuilderTableMapping
             ->select("*")
+            ->where(
+                $queryBuilderTableMapping->expr()->eq(
+                    'serviceprovider',
+                    $queryBuilderTableMapping->createNamedParameter($serviceprovider->getUid())
+                )
+            )
+            ->andWhere(
+                $queryBuilderTableMapping->expr()->eq(
+                    'deleted',
+                    0
+                )
+            )
+            ->andWhere(
+                $queryBuilderTableMapping->expr()->eq(
+                    'hidden',
+                    0
+                )
+            )
             ->from('tx_samlauthentication_domain_model_tablemapping')
             ->execute()->fetchAll();
         foreach ($tableMappingsArray as $key => $value){
@@ -116,12 +132,25 @@ abstract class FactoryUtility
         $queryBuilderFieldMapping = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_samlauthentication_domain_model_fieldmapping');
 
+        //todo extract hidden and deleted to a function
         $fieldMappingsArray = $queryBuilderFieldMapping
             ->select("*")
             ->where(
                 $queryBuilderFieldMapping->expr()->eq(
                     'table',
                     $queryBuilderFieldMapping->createNamedParameter($tablemapping->getUid())
+                )
+            )
+            ->andWhere(
+                $queryBuilderFieldMapping->expr()->eq(
+                    'deleted',
+                    0
+                )
+            )
+            ->andWhere(
+                $queryBuilderFieldMapping->expr()->eq(
+                    'hidden',
+                    0
                 )
             )
             ->from('tx_samlauthentication_domain_model_fieldmapping')
