@@ -1,0 +1,6 @@
+suites:
+  default:
+    namespace: DanielPfeil\Samlauthentication
+    psr4_prefix: DanielPfeil\Samlauthentication
+    src_path: ./Classes
+    spec_path: ./Test

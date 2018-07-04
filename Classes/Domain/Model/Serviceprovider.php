@@ -49,7 +49,8 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param int $uid
      */
-    public function setUid(int $uid){
+    public function setUid(int $uid)
+    {
         if (!$this->uid) {
             $this->uid = $uid;
         }
@@ -186,7 +187,8 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param Tablemapping $tablemapping
      */
-    public function addTablemapping(Tablemapping $tablemapping){
+    public function addTablemapping(Tablemapping $tablemapping)
+    {
         $this->tablemapping->attach($tablemapping);
     }
 
@@ -196,5 +198,10 @@ class Serviceprovider extends AbstractEntity
     public function removeTablemapping(Tablemapping $tablemapping)
     {
         $this->tablemapping->detach($tablemapping);
+    }
+
+    public function isEqual(Serviceprovider $serviceprovider): bool
+    {
+        return $this->getUid() === $serviceprovider->getUid();
     }
 }

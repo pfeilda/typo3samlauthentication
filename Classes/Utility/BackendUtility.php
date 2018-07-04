@@ -5,23 +5,24 @@ namespace DanielPfeil\Samlauthentication\Utility;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 //TODO maybe hooks at the start and the end of the ItemProcFunc
 class BackendUtility
 {
     private $tableMappingTableName = 'tx_samlauthentication_domain_model_tablemapping';
 
-    public function getTables(array &$params) {
-        foreach ($this->getConnections() as $connection){
+    public function getTables(array &$params)
+    {
+        foreach ($this->getConnections() as $connection) {
             $tables = $connection->getSchemaManager()->listTableNames();
-            foreach ($tables as $table){
+            foreach ($tables as $table) {
                 $params["items"][] = [$table, $table];
             }
         }
     }
 
-    public function getFields(array &$params) {
+    public function getFields(array &$params)
+    {
         $queryBuilderTableMapping = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->tableMappingTableName);
         //TODO export to a factory method
@@ -45,10 +46,10 @@ class BackendUtility
             $connection->getDatabase() .
             "`.`" .
             $tableRecord["table"]
-            ."`;"
+            . "`;"
         )->fetchAll();
 
-        foreach ($fields as $field){
+        foreach ($fields as $field) {
             $params["items"][] = [
                 $field['Field'],
                 $field['Field']
@@ -56,7 +57,8 @@ class BackendUtility
         }
     }
 
-    private function getConnections(): array{
+    private function getConnections(): array
+    {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
         $connectionNames = $connectionPool->getConnectionNames();
         $connections = [];
