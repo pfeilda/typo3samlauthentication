@@ -12,7 +12,7 @@ CREATE TABLE 'tx_samlauthentication_domain_model_serviceprovider' (
   type             INT(11) UNSIGNED DEFAULT 1      NOT NULL,
   prefix           VARCHAR(255),
   identityprovider VARCHAR(255) DEFAULT ''         NOT NULL,
-  context          INT(11) UNSIGNED DEFAULT 0      NOT NULL,
+  context          CHAR (2) UNSIGNED DEFAULT "FE"  NOT NULL,
   tablemapping     INT(11) DEFAULT 0               NOT NULL,
 
   PRIMARY KEY (uid),

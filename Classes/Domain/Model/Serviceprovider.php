@@ -137,17 +137,17 @@ class Serviceprovider extends AbstractEntity
     }
 
     /**
-     * @return int
+     * @return String
      */
-    public function getContext(): int
+    public function getContext(): String
     {
         return $this->context;
     }
 
     /**
-     * @param int $context
+     * @param String $context
      */
-    public function setContext(int $context)
+    public function setContext(String $context)
     {
         $this->context = $context;
     }

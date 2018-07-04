@@ -10,10 +10,42 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class ServiceProviderUtilitySpec extends ObjectBehavior
 {
+    /**
+     * @var Serviceprovider[]
+     */
     private $serviceproviders = array();
 
     public function __construct()
     {
+        $this->serviceproviders = $this->generateServiceProviders();
+    }
+
+    public function it_is_initializable()
+    {
+        $this->shouldHaveType(ServiceProviderUtility::class);
+    }
+
+    public function it_is_detecting_correct_active_serviceProvider_for_frontend()
+    {
+        define("TYPO3_MODE", "FE");
+        $referenceServiceProvider = $this->serviceproviders[0];
+        $serverIndex = $referenceServiceProvider->getPrefix() . "Shib-Identity-Provider";
+        $_SERVER[$serverIndex] = $referenceServiceProvider->getIdentityprovider();
+
+        $serviceProviderUtility = ServiceProviderUtility::getInstance();
+        $activeServiceProvider = $serviceProviderUtility->getActive($this->serviceproviders);
+        $activeServiceProvider->shouldBe($referenceServiceProvider);
+    }
+
+    public function it_is_detecting_correct_active_serviceProvider_for_backend()
+    {
+        ServiceProviderUtility::getActive($this->serviceproviders);
+    }
+
+    private function generateServiceProviders(): array
+    {
+        $serviceProviders = [];
+
         $tableMapping = new Tablemapping();
         $tableMapping->setUid(1);
         $tableMapping->setHidden(false);
@@ -77,20 +109,7 @@ class ServiceProviderUtilitySpec extends ObjectBehavior
         $serviceProvider->setTitle("Test5");
         $serviceProvider->setType(1);
         $serviceProviders[] = $serviceProvider;
-    }
 
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType(ServiceProviderUtility::class);
-    }
-
-    public function detecting_correct_active_serviceProvider_for_frontend()
-    {
-        ServiceProviderUtility::getActive();
-    }
-
-    public function detecting_correct_active_serviceProvider_for_backend()
-    {
-        ServiceProviderUtility::getActive();
+        return $serviceProviders;
     }
 }
