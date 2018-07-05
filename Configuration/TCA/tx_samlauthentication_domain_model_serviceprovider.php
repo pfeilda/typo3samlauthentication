@@ -79,9 +79,9 @@ return array(
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['Frontend', 1],
-                    ['Backend', 2],
-                    ['Backend and Frontend', 3]
+                    ['Frontend', 'FE'],
+                    ['Backend', 'BE'],
+                    ['Frontend and Backend', 'FB']
                 ],
                 'minitems' => 1,
                 'maxitems' => 1
