@@ -15,6 +15,8 @@ interface SamlUtility
 
     public function getUserData(Serviceprovider $serviceprovider): array;
 
+    public function saveUserData(Serviceprovider $serviceprovider): bool;
+
     public function getGroup(): array;
 
     public function getUserGroups($user);

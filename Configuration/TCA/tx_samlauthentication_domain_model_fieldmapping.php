@@ -42,6 +42,18 @@ return array(
                 'eval' => 'trim,required'
             )
         ),
+        'identifier' => array(
+            'exclude' => false,
+            'label' => 'Identifier',
+            'config' => array(
+                'type' => 'check',
+                'items' => array(
+                    '1' => array(
+                        '0' => 'Identifier'
+                    )
+                )
+            )
+        )
     ),
     'palettes' => array(
         'hidden' => array(
@@ -54,7 +66,7 @@ return array(
         '0' => array(
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    field,foreignfield,
+                    field,foreignfield,identifier,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     '

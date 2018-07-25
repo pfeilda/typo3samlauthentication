@@ -3,6 +3,8 @@
 
 namespace DanielPfeil\Samlauthentication\Utility;
 
+use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
+use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -66,5 +68,13 @@ class BackendUtility
             $connections[] = $connectionPool->getConnectionByName($connectionName);
         }
         return $connections;
+    }
+
+    /**
+     * @param Fieldmapping[] $fieldMapping
+     */
+    private function saveValues(array $fieldMapping, Tablemapping $tablemapping): bool
+    {
+        
     }
 }

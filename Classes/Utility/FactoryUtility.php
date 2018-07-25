@@ -10,6 +10,7 @@ namespace DanielPfeil\Samlauthentication\Utility;
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
 use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
+use DanielPfeil\Samlauthentication\Enum\ServiceProviderType;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -17,16 +18,14 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 abstract class FactoryUtility
 {
-    public static function getSAMLUtility(): SamlUtility
+    public static function getSAMLUtility(Serviceprovider $serviceprovider): ?SamlUtility
     {
         //Todo make configurable
-        if (true) {
+        if ($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH) {
             //apache shibd
             return new ApacheSamlUtility();
-        } else {
-            //openSAML
-//            return ;
         }
+        return null;
     }
 
     public static function getExtensionConfiguration(): array
@@ -41,7 +40,7 @@ abstract class FactoryUtility
 
         $serviceProviders = $queryBuilderServiceProviders->select("*")->from('tx_samlauthentication_domain_model_serviceprovider')->execute();
         $serviceProvidersArray = $serviceProviders->fetchAll();
-        foreach ($serviceProvidersArray as $key => $value){
+        foreach ($serviceProvidersArray as $key => $value) {
             $serviceProvider = self::getServiceProviderObjectWithoutTablemappingFromArray($value);
             $serviceProvider->setTablemapping(self::getTableMappingObjectStorageForServiceProvider($serviceProvider));
             $serviceProvidersArray[$key] = $serviceProvider;
@@ -49,7 +48,8 @@ abstract class FactoryUtility
         return $serviceProvidersArray;
     }
 
-    private static function getServiceProviderObjectWithoutTablemappingFromArray(array $serviceProviderArray):Serviceprovider {
+    private static function getServiceProviderObjectWithoutTablemappingFromArray(array $serviceProviderArray
+    ): Serviceprovider {
         $serviceProvider = new Serviceprovider();
 
         $serviceProvider->setUid($serviceProviderArray["uid"]);
@@ -66,7 +66,8 @@ abstract class FactoryUtility
         return $serviceProvider;
     }
 
-    private static function getTableMappingFromArrayWithoutFieldMapping(array $tableMappingArray):Tablemapping{
+    private static function getTableMappingFromArrayWithoutFieldMapping(array $tableMappingArray): Tablemapping
+    {
         $tableMapping = new Tablemapping();
 
         $tableMapping->setUid($tableMappingArray["uid"]);
@@ -77,7 +78,8 @@ abstract class FactoryUtility
         return $tableMapping;
     }
 
-    private static function getFieldMappingFromArray(array $fieldMappingArray):Fieldmapping{
+    private static function getFieldMappingFromArray(array $fieldMappingArray): Fieldmapping
+    {
         $fieldMapping = new Fieldmapping();
 
         $fieldMapping->setUid($fieldMappingArray["uid"]);
@@ -85,11 +87,13 @@ abstract class FactoryUtility
         $fieldMapping->setHidden($fieldMappingArray["hidden"]);
         $fieldMapping->setField($fieldMappingArray["field"]);
         $fieldMapping->setForeignfield($fieldMappingArray["foreignfield"]);
+        $fieldMapping->setIdentifier((bool)$fieldMappingArray["identifier"]);
 
         return $fieldMapping;
     }
 
-    private static function getTableMappingObjectStorageForServiceProvider(Serviceprovider $serviceprovider):ObjectStorage{
+    private static function getTableMappingObjectStorageForServiceProvider(Serviceprovider $serviceprovider
+    ): ObjectStorage {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $objectStorage = $objectManager->get(ObjectStorage::class);
         $queryBuilderTableMapping = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -117,7 +121,7 @@ abstract class FactoryUtility
             )
             ->from('tx_samlauthentication_domain_model_tablemapping')
             ->execute()->fetchAll();
-        foreach ($tableMappingsArray as $key => $value){
+        foreach ($tableMappingsArray as $key => $value) {
             $tableMapping = self::getTableMappingFromArrayWithoutFieldMapping($value);
             $tableMapping->setFields(self::getFieldMappingObjectStorageForTableMapping($tableMapping));
             $objectStorage->attach($tableMapping);
@@ -126,7 +130,8 @@ abstract class FactoryUtility
         return $objectStorage;
     }
 
-    private static function getFieldMappingObjectStorageForTableMapping(Tablemapping $tablemapping): ObjectStorage{
+    private static function getFieldMappingObjectStorageForTableMapping(Tablemapping $tablemapping): ObjectStorage
+    {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $objectStorage = $objectManager->get(ObjectStorage::class);
         $queryBuilderFieldMapping = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -156,7 +161,7 @@ abstract class FactoryUtility
             ->from('tx_samlauthentication_domain_model_fieldmapping')
             ->execute()->fetchAll();
 
-        foreach ($fieldMappingsArray as $key => $value){
+        foreach ($fieldMappingsArray as $key => $value) {
             $fieldMapping = self::getFieldMappingFromArray($value);
             $objectStorage->attach($fieldMapping);
         }

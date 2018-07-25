@@ -3,113 +3,132 @@
 namespace spec\DanielPfeil\Samlauthentication\Utility;
 
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
-use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
+use DanielPfeil\Samlauthentication\Enum\ServiceProviderContext;
+use DanielPfeil\Samlauthentication\Enum\ServiceProviderType;
 use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
 use PhpSpec\ObjectBehavior;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class ServiceProviderUtilitySpec extends ObjectBehavior
 {
     /**
      * @var Serviceprovider[]
      */
-    private $serviceproviders = array();
+    private $serviceProviders;
 
-    public function __construct()
+    /**
+     * @var Serviceprovider[]
+     */
+    private $activeserviceProviders;
+
+    /**
+     * @var Serviceprovider[]
+     */
+    private $inactiveserviceProviders;
+
+    final public function let()
     {
-        $this->serviceproviders = $this->generateServiceProviders();
+        if (!defined('TYPO3_MODE')) {
+            define("TYPO3_MODE", "BE");
+        }
+
+        $this->beConstructedThrough('getInstance');
+
+        $this->activeserviceProviders = [];
+
+        $serviceProvider = new Serviceprovider();
+        $serviceProvider->setUid(1);
+        $serviceProvider->setType(ServiceProviderType::APACHE_SHIBBOLETH);
+        $serviceProvider->setContext(ServiceProviderContext::FRONT_AND_BACK_END);
+        $serviceProvider->setHidden(false);
+        $serviceProvider->setPrefix("prefix_eins_");
+        $serviceProvider->setIdentityprovider("https://test.eins");
+        $this->activeserviceProviders[] = $serviceProvider;
+
+        $serviceProvider = new Serviceprovider();
+        $serviceProvider->setUid(2);
+        $serviceProvider->setType(ServiceProviderType::APACHE_SHIBBOLETH);
+        $serviceProvider->setContext(ServiceProviderContext::BACK_END);
+        $serviceProvider->setHidden(false);
+        $serviceProvider->setPrefix("prefix_zwei_");
+        $serviceProvider->setIdentityprovider("https://test.zwei");
+        $this->activeserviceProviders[] = $serviceProvider;
+
+        $serviceProvider = new Serviceprovider();
+        $serviceProvider->setUid(3);
+        $serviceProvider->setType(ServiceProviderType::APACHE_SHIBBOLETH);
+        $serviceProvider->setContext(ServiceProviderContext::BACK_END);
+        $serviceProvider->setHidden(true);
+        $serviceProvider->setPrefix("prefix_zwei_");
+        $serviceProvider->setIdentityprovider("https://test.zwei");
+        $this->inactiveserviceProviders[] = $serviceProvider;
+
+        $serviceProvider = new Serviceprovider();
+        $serviceProvider->setUid(4);
+        $serviceProvider->setType(ServiceProviderType::APACHE_SHIBBOLETH);
+        $serviceProvider->setContext(ServiceProviderContext::BACK_END);
+        $serviceProvider->setHidden(false);
+        $serviceProvider->setPrefix("prefix_vier_");
+        $serviceProvider->setIdentityprovider("https://test.zwei");
+        $this->inactiveserviceProviders[] = $serviceProvider;
+
+        $serviceProvider = new Serviceprovider();
+        $serviceProvider->setUid(5);
+        $serviceProvider->setType(ServiceProviderType::APACHE_SHIBBOLETH);
+        $serviceProvider->setContext(ServiceProviderContext::BACK_END);
+        $serviceProvider->setHidden(false);
+        $serviceProvider->setPrefix("prefix_fuenf_");
+        $serviceProvider->setIdentityprovider("https://test.fuenf");
+        $this->inactiveserviceProviders[] = $serviceProvider;
+
+        $serviceProvider = new Serviceprovider();
+        $serviceProvider->setUid(6);
+        $serviceProvider->setType(ServiceProviderType::APACHE_SHIBBOLETH);
+        $serviceProvider->setContext(ServiceProviderContext::BACK_END);
+        $serviceProvider->setHidden(false);
+        $serviceProvider->setPrefix("prefix_sechs_");
+        $serviceProvider->setIdentityprovider("https://test.zwei");
+        $this->inactiveserviceProviders[] = $serviceProvider;
+
+        $serviceProvider = new Serviceprovider();
+        $serviceProvider->setUid(7);
+        $serviceProvider->setType(ServiceProviderType::APACHE_SHIBBOLETH);
+        $serviceProvider->setContext(ServiceProviderContext::FRONT_END);
+        $serviceProvider->setHidden(false);
+        $serviceProvider->setPrefix("prefix_zwei_");
+        $serviceProvider->setIdentityprovider("https://test.zwei");
+        $this->inactiveserviceProviders[] = $serviceProvider;
+
+        $this->serviceProviders = array_merge($this->activeserviceProviders, $this->inactiveserviceProviders);
     }
 
-    public function it_is_initializable()
+    final public function it_is_initializable()
     {
         $this->shouldHaveType(ServiceProviderUtility::class);
     }
 
-    public function it_is_detecting_correct_active_serviceProvider_for_frontend()
+    final public function it_is_detecting_correct_active_serviceProvider_for_frontend()
     {
-        define("TYPO3_MODE", "FE");
-        $referenceServiceProvider = $this->serviceproviders[0];
-        $serverIndex = $referenceServiceProvider->getPrefix() . "Shib-Identity-Provider";
-        $_SERVER[$serverIndex] = $referenceServiceProvider->getIdentityprovider();
+        foreach ($this->activeserviceProviders as $activeServiceProvider) {
+            if ($activeServiceProvider->getType() === ServiceProviderType::APACHE_SHIBBOLETH) {
+                $serverIndex = $activeServiceProvider->getPrefix() . "Shib-Identity-Provider";
+                $_SERVER[$serverIndex] = $activeServiceProvider->getIdentityprovider();
+            }
+        }
 
-        $serviceProviderUtility = ServiceProviderUtility::getInstance();
-        $activeServiceProvider = $serviceProviderUtility->getActive($this->serviceproviders);
-        $activeServiceProvider->shouldBe($referenceServiceProvider);
+        $this->getActive($this->serviceProviders)->shouldBeEqualTo($this->activeserviceProviders);
+
+        foreach ($this->activeserviceProviders as $activeServiceProvider) {
+            if ($activeServiceProvider->getType() === ServiceProviderType::APACHE_SHIBBOLETH) {
+                $serverIndex = $activeServiceProvider->getPrefix() . "Shib-Identity-Provider";
+                unset($_SERVER[$serverIndex]);
+            }
+        }
     }
 
-    public function it_is_detecting_correct_active_serviceProvider_for_backend()
+    final public function it_is_able_to_return_null_if_no_matching_serviceprovider_is_available()
     {
-        ServiceProviderUtility::getActive($this->serviceproviders);
-    }
+        $_SERVER["unknownPrefix_Shib-Identity-Provider"] = "https://not.existing";
 
-    private function generateServiceProviders(): array
-    {
-        $serviceProviders = [];
-
-        $tableMapping = new Tablemapping();
-        $tableMapping->setUid(1);
-        $tableMapping->setHidden(false);
-        $tableMapping->setTable("fe_user");
-
-        $tableMappingStorage = new ObjectStorage();
-        $tableMappingStorage->attach($tableMapping);
-
-        $serviceProvider = new Serviceprovider();
-        $serviceProvider->setUid(1);
-        $serviceProvider->setContext(0);
-        $serviceProvider->setDestinationpid(2);
-        $serviceProvider->setHidden(false);
-        $serviceProvider->setIdentityprovider("https://test.idp");
-        $serviceProvider->setPrefix("pre_");
-        $serviceProvider->setTitle("title");
-        $serviceProvider->setType(1);
-        $serviceProvider->setTablemapping($tableMappingStorage);
-        $serviceProviders[] = $serviceProvider;
-
-        $serviceProvider = new Serviceprovider();
-        $serviceProvider->setUid(2);
-        $serviceProvider->setContext(0);
-        $serviceProvider->setDestinationpid(3);
-        $serviceProvider->setHidden(true);
-        $serviceProvider->setIdentityprovider("https://test2.idp");
-        $serviceProvider->setPrefix("prefix_");
-        $serviceProvider->setTitle("Test");
-        $serviceProvider->setType(1);
-        $serviceProviders[] = $serviceProvider;
-
-        $serviceProvider = new Serviceprovider();
-        $serviceProvider->setUid(3);
-        $serviceProvider->setContext(0);
-        $serviceProvider->setDestinationpid(3);
-        $serviceProvider->setHidden(false);
-        $serviceProvider->setIdentityprovider("https://test3.idp");
-        $serviceProvider->setPrefix("prefix3_");
-        $serviceProvider->setTitle("Test3");
-        $serviceProvider->setType(1);
-        $serviceProviders[] = $serviceProvider;
-
-        $serviceProvider = new Serviceprovider();
-        $serviceProvider->setUid(4);
-        $serviceProvider->setContext(1);
-        $serviceProvider->setDestinationpid(3);
-        $serviceProvider->setHidden(false);
-        $serviceProvider->setIdentityprovider("https://test4.idp");
-        $serviceProvider->setPrefix("prefix4_");
-        $serviceProvider->setTitle("Test4");
-        $serviceProvider->setType(1);
-        $serviceProviders[] = $serviceProvider;
-
-        $serviceProvider = new Serviceprovider();
-        $serviceProvider->setUid(5);
-        $serviceProvider->setContext(2);
-        $serviceProvider->setDestinationpid(3);
-        $serviceProvider->setHidden(false);
-        $serviceProvider->setIdentityprovider("https://test5.idp");
-        $serviceProvider->setPrefix("prefix5_");
-        $serviceProvider->setTitle("Test5");
-        $serviceProvider->setType(1);
-        $serviceProviders[] = $serviceProvider;
-
-        return $serviceProviders;
+        $this->getActive($this->serviceProviders)->shouldBeEqualTo([]);
     }
 }

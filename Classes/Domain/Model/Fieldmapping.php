@@ -19,13 +19,17 @@ class Fieldmapping extends AbstractEntity
      * @var string
      */
     protected $foreignfield = "";
+    /**
+     * @var boolean
+     */
+    protected $identifier = false;
 
     /**
      * @param int $uid
      */
-    public function setUid(int $uid){
+    public function setUid(int $uid)
+    {
         if (!$this->uid) {
-            $this->uid = $uid;
             $this->uid = $uid;
         }
     }
@@ -76,5 +80,21 @@ class Fieldmapping extends AbstractEntity
     public function setForeignfield(string $foreignfield)
     {
         $this->foreignfield = $foreignfield;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIdentifier(): bool
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param bool $identifier
+     */
+    public function setIdentifier(bool $identifier): void
+    {
+        $this->identifier = $identifier;
     }
 }

@@ -46,6 +46,7 @@ CREATE TABLE 'tx_samlauthentication_domain_model_fieldmapping' (
   cruser_id    INT(11) UNSIGNED DEFAULT '0'    NOT NULL,
 
   table        INT(11) DEFAULT 0               NOT NULL,
+  identifier   TINYINT(1) DEFAULT 0            NOT NULL,
   field        VARCHAR(255) DEFAULT ''         NOT NULL,
   foreignfield VARCHAR(255) DEFAULT ''         NOT NULL,
 

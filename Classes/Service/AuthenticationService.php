@@ -4,7 +4,7 @@ namespace DanielPfeil\Samlauthentication\Service;
 
 use DanielPfeil\Samlauthentication\Enum\AuthenticationStatus;
 use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
-use TYPO3\CMS\Core\Database\ConnectionPool;
+use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
@@ -12,46 +12,52 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 {
     public function getUser()
     {
-        $user = parent::getUser();
-        if (!$user) {
-            try {
-                $samlComponent = FactoryUtility::getSAMLUtility();
-                $serviceProviders = FactoryUtility::getSAMLUtility();
-                $samlUserData = $samlComponent->getUserData();
+        //todo check if parent is needed before or after?
+        //$user = parent::getUser();
+        $user = false;
+        try {
+            $serviceProviderUtility = ServiceProviderUtility::getInstance();
 
-                DebuggerUtility::var_dump($_SERVER);
-
-                $queryBuilderFeUsers = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_user');
-                $queryBuilderFeUsers->insert('fe_users')
-                    ->values([
-                        'username' => $samlUserData["uid"],
-                        'password' => \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance(null)->getHashedPassword('123'),
-                        'PID' => 2,
-                        'tstamp' => time(),
-                        'usergroup' => '1'
-                    ])
-                    ->execute();
-
-                $user = $this->fetchUserRecord($this->login['uname']);
-
-                if (!is_array($user)) {
-                    // Failed login attempt (no username found)
-                    $this->writelog(255, 3, 3, 2, 'Login-attempt from %s (%s), username \'%s\' not found!!',
-                        [$this->authInfo['REMOTE_ADDR'], $this->authInfo['REMOTE_HOST'], $this->login['uname']]);
-                    // Logout written to log
-                    GeneralUtility::sysLog(sprintf('Login-attempt from %s (%s), username \'%s\' not found!',
-                        $this->authInfo['REMOTE_ADDR'], $this->authInfo['REMOTE_HOST'], $this->login['uname']), 'core',
-                        GeneralUtility::SYSLOG_SEVERITY_WARNING);
-                } else {
-                    if ($this->writeDevLog) {
-                        GeneralUtility::devLog('User found: ' . GeneralUtility::arrayToLogString($user,
-                                [$this->db_user['userid_column'], $this->db_user['username_column']]), self::class);
-                    }
+            $activeServiceProviders = $serviceProviderUtility->getActive(FactoryUtility::getServiceProviders());
+            foreach ($activeServiceProviders as $activeServiceProvider) {
+                $samlComponent = FactoryUtility::getSAMLUtility($activeServiceProvider);
+                $storedSuccessfull = $samlComponent->saveUserData($activeServiceProvider);
+                if ($storedSuccessfull) {
+                    break;
                 }
-            } catch (\Exception $exception) {
-                //TODO implement
-                DebuggerUtility::var_dump($exception);
             }
+
+//                $queryBuilderFeUsers = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_user');
+//                $queryBuilderFeUsers->insert('fe_users')
+//                    ->values([
+//                        'username' => $samlUserData["uid"],
+//                        'password' => \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance(null)->getHashedPassword('123'),
+//                        'PID' => 2,
+//                        'tstamp' => time(),
+//                        'usergroup' => '1'
+//                    ])
+//                    ->execute();
+//
+
+            $user = $this->fetchUserRecord($this->login['uname']);
+
+            if (!is_array($user)) {
+                // Failed login attempt (no username found)
+                $this->writelog(255, 3, 3, 2, 'Login-attempt from %s (%s), username \'%s\' not found!!',
+                    [$this->authInfo['REMOTE_ADDR'], $this->authInfo['REMOTE_HOST'], $this->login['uname']]);
+                // Logout written to log
+                GeneralUtility::sysLog(sprintf('Login-attempt from %s (%s), username \'%s\' not found!',
+                    $this->authInfo['REMOTE_ADDR'], $this->authInfo['REMOTE_HOST'], $this->login['uname']), 'core',
+                    GeneralUtility::SYSLOG_SEVERITY_WARNING);
+            } else {
+                if ($this->writeDevLog) {
+                    GeneralUtility::devLog('User found: ' . GeneralUtility::arrayToLogString($user,
+                            [$this->db_user['userid_column'], $this->db_user['username_column']]), self::class);
+                }
+            }
+        } catch (\Exception $exception) {
+            //TODO implement
+            DebuggerUtility::var_dump($exception);
         }
 
         return $user;
@@ -59,12 +65,25 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 
     public function authUser(array $user)
     {
-        //todo make configurable what SAML is to use
-        $samlComponent = FactoryUtility::getSAMLUtility();
-        $samlUserData = $samlComponent->getUserData();
+        $serviceProviderUtility = ServiceProviderUtility::getInstance();
 
-        if ($samlUserData["uid"] == $user["username"]) {
-            return AuthenticationStatus::SUCCESS_BREAK;
+        $activeServiceProviders = $serviceProviderUtility->getActive(FactoryUtility::getServiceProviders());
+
+        foreach ($activeServiceProviders as $activeServiceProvider) {
+            $samlComponent = FactoryUtility::getSAMLUtility($activeServiceProvider);
+            $samlUserData = $samlComponent->getUserData($activeServiceProvider);
+
+            $samlUsername = $samlUserData["be_users"]["username"]->getValue();
+            if (TYPO3_MODE === "FE") {
+                $samlUsername = $samlUserData["fe_users"]["username"]->getValue();
+            }
+
+            DebuggerUtility::var_dump($_SERVER);
+
+
+            if ($samlUsername == $user["username"]) {
+                return AuthenticationStatus::SUCCESS_BREAK;
+            }
         }
         return AuthenticationStatus::FAIL_CONTINUE;
     }

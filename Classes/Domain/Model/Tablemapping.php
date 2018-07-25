@@ -31,7 +31,8 @@ class Tablemapping extends AbstractEntity
     /**
      * @param int $uid
      */
-    public function setUid(int $uid){
+    public function setUid(int $uid)
+    {
         if (!$this->uid) {
             $this->uid = $uid;
         }
