@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "DanielPfeil\\Samlauthentication": "Classes/"
+      "DanielPfeil\\Samlauthentication\\": "Classes/"
     }
   }
 }
