@@ -20,13 +20,11 @@ class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
             $samlComponent = FactoryUtility::getSAMLUtility($activeServiceProvider);
             $samlUserData = $samlComponent->getUserData($activeServiceProvider);
 
-            $samlUsername = $samlUserData["be_users"]["username"]->getValue();
             if (TYPO3_MODE === "FE") {
                 $samlUsername = $samlUserData["fe_users"]["username"]->getValue();
+            } else {
+                $samlUsername = $samlUserData["be_users"]["username"]->getValue();
             }
-
-            DebuggerUtility::var_dump($_SERVER);
-
 
             if ($samlUsername == $user["username"]) {
                 return AuthenticationStatus::SUCCESS_BREAK;

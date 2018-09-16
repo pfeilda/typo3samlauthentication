@@ -157,11 +157,5 @@ class ApacheSamlUtility implements SamlUtility
             $result[$field->getField()] = $fieldValue;
         }
         return $result;
-//        return [
-//            "uid" => "admin5",
-//            "displayName" => "Daniel Pfeil",
-//            "givenName" => "Daniel",
-//            "sureName" => "Pfeil"
-//        ];
     }
 }
