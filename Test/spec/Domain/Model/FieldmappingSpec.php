@@ -37,48 +37,143 @@ class FieldmappingSpec extends ObjectBehavior
         $this->shouldHaveType(Fieldmapping::class);
     }
 
-    final public function testSetIdentifier()
+    final public function it_is_set_identifier_false()
     {
-
+        $this->setIdentifier(false);
+        $this->isIdentifier()->shouldBe(false);
     }
 
-    final public function testSetHidden()
+    final public function it_is_set_identifier_true()
     {
-
+        $this->setIdentifier(true);
+        $this->isIdentifier()->shouldBe(true);
     }
 
-    final public function testGetField()
+    final public function it_is_identifier_initial()
     {
-
+        $this->isIdentifier()->shouldBe(false);
     }
 
-    final public function testIsIdentifier()
-    {
 
+    final public function it_is_identifier_true()
+    {
+        $this->setIdentifier(true);
+        $this->isIdentifier()->shouldBe(true);
     }
 
-    final public function testSetField()
+    final public function it_is_identifier_false()
     {
-
+        $this->setIdentifier(false);
+        $this->isIdentifier()->shouldBe(false);
     }
 
-    final public function testIsHidden()
+    final public function it_is_set_hidden_false()
     {
-
+        $this->setHidden(false);
+        $this->isHidden()->shouldBe(false);
     }
 
-    final public function testSetForeignfield()
+    final public function it_is_set_hidden_true()
     {
-
+        $this->setHidden(true);
+        $this->isHidden()->shouldBe(true);
     }
 
-    final public function testGetForeignfield()
+    final public function it_is_hidden_initial()
     {
-
+        $this->isHidden()->shouldBe(false);
     }
 
-    final public function testSetUid()
-    {
 
+    final public function it_is_hidden_true()
+    {
+        $this->setHidden(true);
+        $this->isHidden()->shouldBe(true);
+    }
+
+    final public function it_is_hidden_false()
+    {
+        $this->setHidden(false);
+        $this->isHidden()->shouldBe(false);
+    }
+
+    final public function it_is_get_field_initial()
+    {
+        $this->getField()->shouldBe("");
+    }
+
+    final public function it_is_get_field()
+    {
+        $test = "test";
+        $this->setField($test);
+        $this->getField()->shouldBe($test);
+    }
+
+    final public function it_is_set_field()
+    {
+        $test = "test";
+        $this->setField($test);
+        $this->getField()->shouldBe($test);
+    }
+
+    final public function it_is_get_foreign_field_initial()
+    {
+        $this->getForeignfield()->shouldBe("");
+    }
+
+    final public function it_is_get_foreign_field()
+    {
+        $test = "test";
+        $this->setForeignfield($test);
+        $this->getForeignfield()->shouldBe($test);
+    }
+
+    final public function it_is_set_foreign_field()
+    {
+        $test = "test";
+        $this->setForeignfield($test);
+        $this->getForeignfield()->shouldBe($test);
+    }
+
+    final public function it_is_set_uid_correct()
+    {
+        $uid = 1;
+        $this->setUid($uid);
+        $this->getUid()->shouldBe($uid);
+    }
+
+    final public function it_is_set_uid_to_low()
+    {
+        $uid = 0;
+        $this->setUid($uid);
+        $this->getUid()->shouldBeNull();
+    }
+
+    final public function it_is_set_uid_twice()
+    {
+        $uid = 1;
+        $this->setUid($uid);
+        $this->setUid(10);
+        $this->getUid()->shouldBe($uid);
+    }
+
+    final public function it_is_set_uid_twice_zero()
+    {
+        $uid = 1;
+        $this->setUid($uid);
+        $this->setUid(0);
+        $this->getUid()->shouldBe($uid);
+    }
+
+    final public function it_is_get_uid_initial()
+    {
+        $this->getUid()->shouldBeNull();
+    }
+
+    final public function it_is_set_uid()
+    {
+        $uid = 10;
+        $this->setUid($uid);
+        $this->getUid()->shouldBe(10);
     }
 }
