@@ -19,9 +19,9 @@
 
 return array(
     'ctrl' => array(
-        'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
-        'label' => 'field',
-        'iconfile' => '',
+        'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping',
+        'label' => 'table',
+        'iconfile' => 'EXT:samlauthentication/Resources/Public/Icons/FontAwesome/table.svg',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'table ASC',
@@ -29,7 +29,7 @@ return array(
         'enablecolumns' => array(
             'disabled' => 'hidden'
         ),
-        'hideTable' => false
+        'hideTable' => false,
     ),
     'columns' => array(
         'hidden' => array(
@@ -44,34 +44,24 @@ return array(
                 )
             )
         ),
-        'field' => array(
+        'table' => array(
             'exclude' => false,
-            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.field',
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping.table',
             'config' => array(
                 'type' => 'select',
-                'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getFields'
+                'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getTables'
             )
         ),
-        'foreignfield' => array(
+        'fields' => array(
             'exclude' => false,
-            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.foreignfield',
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
             'config' => array(
-                'type' => 'input',
-                'eval' => 'trim,required'
+                'type' => 'inline',
+                'foreign_table' => 'tx_samlauthentication_domain_model_fieldmapping',
+                'foreign_field' => 'table',
+                'foreign_label' => 'field',
             )
         ),
-        'identifier' => array(
-            'exclude' => false,
-            'label' => 'Identifier',
-            'config' => array(
-                'type' => 'check',
-                'items' => array(
-                    '1' => array(
-                        '0' => 'Identifier'
-                    )
-                )
-            )
-        )
     ),
     'palettes' => array(
         'hidden' => array(
@@ -84,7 +74,7 @@ return array(
         '0' => array(
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    field,foreignfield,identifier,
+                    table,fields,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     '

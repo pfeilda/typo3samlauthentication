@@ -21,7 +21,7 @@ return array(
     'ctrl' => array(
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
         'label' => 'field',
-        'iconfile' => '',
+        'iconfile' => 'EXT:samlauthentication/Resources/Public/Icons/FontAwesome/columns.svg',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'table ASC',

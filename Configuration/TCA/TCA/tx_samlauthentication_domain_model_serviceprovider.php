@@ -21,7 +21,7 @@ return array(
     'ctrl' => array(
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider',
         'label' => 'title',
-        'iconfile' => '',
+        'iconfile' => 'EXT:samlauthentication/Resources/Public/Icons/FontAwesome/user-lock.svg',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'title ASC',
