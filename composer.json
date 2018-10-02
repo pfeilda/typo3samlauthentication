@@ -10,9 +10,10 @@
     "serviceprovider"
   ],
   "license":"GPL-3.0-only",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "require": {
-    "typo3/cms-core": ">=8.6.0"
+    "typo3/cms-core": ">=8.6.0",
+    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
