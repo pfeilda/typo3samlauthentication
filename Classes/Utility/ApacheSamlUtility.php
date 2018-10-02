@@ -28,7 +28,6 @@ namespace DanielPfeil\Samlauthentication\Utility;
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
 use DanielPfeil\Samlauthentication\Domain\Model\FieldValue;
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
-use DanielPfeil\Samlauthentication\Domain\Model\Session;
 use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -46,12 +45,6 @@ class ApacheSamlUtility implements SamlUtility
     public function isSessionExisting(): bool
     {
         // TODO: Implement isSessionExisting() method.
-        return null;
-    }
-
-    public function getSession(): Session
-    {
-        // TODO: Implement getSession() method.
         return null;
     }
 
