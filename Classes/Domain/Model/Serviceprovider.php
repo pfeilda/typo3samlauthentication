@@ -68,9 +68,17 @@ class Serviceprovider extends AbstractEntity
      */
     public function setUid(int $uid)
     {
-        if (!$this->uid) {
+        if (!$this->uid && $uid > 0) {
             $this->uid = $uid;
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getUid(): ?int
+    {
+        return $this->uid;
     }
 
     /**
@@ -219,6 +227,9 @@ class Serviceprovider extends AbstractEntity
 
     public function isEqual(Serviceprovider $serviceprovider): bool
     {
-        return $this->getUid() === $serviceprovider->getUid();
+        if ($this->uid !== null) {
+            return $this->getUid() === $serviceprovider->getUid();
+        }
+        return false;
     }
 }
