@@ -51,12 +51,15 @@ abstract class FactoryUtility
         return unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['samlauthentication']);
     }
 
-    public static function getServiceProviders(): array
+    public static function getServiceProviderModels(): array
     {
         $queryBuilderServiceProviders = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_samlauthentication_domain_model_serviceprovider');
 
-        $serviceProviders = $queryBuilderServiceProviders->select("*")->from('tx_samlauthentication_domain_model_serviceprovider')->execute();
+        $serviceProviders = $queryBuilderServiceProviders
+            ->select("*")
+            ->from('tx_samlauthentication_domain_model_serviceprovider')
+            ->execute();
         $serviceProvidersArray = $serviceProviders->fetchAll();
         foreach ($serviceProvidersArray as $key => $value) {
             $serviceProvider = self::getServiceProviderObjectWithoutTablemappingFromArray($value);
@@ -66,8 +69,8 @@ abstract class FactoryUtility
         return $serviceProvidersArray;
     }
 
-    private static function getServiceProviderObjectWithoutTablemappingFromArray(array $serviceProviderArray
-    ): Serviceprovider {
+    private static function getServiceProviderObjectWithoutTablemappingFromArray(array $serviceProviderArray): Serviceprovider
+    {
         $serviceProvider = new Serviceprovider();
 
         $serviceProvider->setUid($serviceProviderArray["uid"]);
