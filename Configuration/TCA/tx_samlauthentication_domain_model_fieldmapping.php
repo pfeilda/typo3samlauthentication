@@ -21,15 +21,14 @@ return array(
     'ctrl' => array(
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
         'label' => 'field',
-        'iconfile' => '',
+        'iconfile' => 'EXT:samlauthentication/Exticon.svg',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'table ASC',
         'delete' => 'deleted',
         'enablecolumns' => array(
             'disabled' => 'hidden'
-        ),
-        'hideTable' => false
+        )
     ),
     'columns' => array(
         'hidden' => array(
@@ -49,7 +48,8 @@ return array(
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.field',
             'config' => array(
                 'type' => 'select',
-                'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getFields'
+                'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getFields',
+                'renderType' => 'selectSingle'
             )
         ),
         'foreignfield' => array(

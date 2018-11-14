@@ -13,7 +13,8 @@
   "version": "1.2.0",
   "require": {
     "typo3/cms-core": ">=8.6.0",
-    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0"
+    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0",
+    "php":"^7"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",

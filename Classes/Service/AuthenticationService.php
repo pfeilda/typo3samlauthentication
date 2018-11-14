@@ -25,7 +25,7 @@ use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
 
 final class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 {
-    final public function authUser(array $user)
+    final public function authUser(array $user):int
     {
         $serviceProviderUtility = ServiceProviderUtility::getInstance();
 
