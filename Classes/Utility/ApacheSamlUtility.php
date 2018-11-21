@@ -139,7 +139,6 @@ class ApacheSamlUtility implements SamlUtility
                     ->values($values)
                     ->execute();*/
             }
-            //DebuggerUtility::var_dump($result);
         }
         //todo make check
         return true;

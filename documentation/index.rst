@@ -11,6 +11,12 @@ Welcome to TYPO3 SAML Authentication's documentation!
    :caption: Contents:
 
 
+General Notes
+=============
+* user gets not actualized if already existing
+* implement checkbox if user must exists
+
+
 
 Indices and tables
 ==================

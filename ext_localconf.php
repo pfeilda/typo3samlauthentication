@@ -25,7 +25,7 @@
         'title' => 'Authentication service',
         'description' => 'Authentication with over a Service Provider.',
 
-        'subtype' => 'authUserFE, authUserBE',
+        'subtype' => 'authUserFE, authUserBE, getUserFE',
 
         'available' => true,
         'priority' => 100,
