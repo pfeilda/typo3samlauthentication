@@ -180,7 +180,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @return string
      */
-    public function getPrefix(): string
+    public function getPrefix(): ?string
     {
         return $this->prefix;
     }
@@ -188,7 +188,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param string $prefix
      */
-    public function setPrefix(string $prefix)
+    public function setPrefix(?string $prefix)
     {
         $this->prefix = $prefix;
     }
