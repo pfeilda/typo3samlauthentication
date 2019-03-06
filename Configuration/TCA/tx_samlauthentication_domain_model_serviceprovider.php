@@ -66,7 +66,6 @@ return array(
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['Apache2 Shibboleth SP', 1],
-                    ['OpenSAML', 2]
                 ],
                 'minitems' => 1,
                 'maxitems' => 1
