@@ -50,21 +50,6 @@ class ApacheSamlUtility implements SamlUtility
 
     public function getUserData(Serviceprovider $serviceprovider): array
     {
-        /***************************
-         *** Only for developing ***
-         ***************************/
-        if ((bool)FactoryUtility::getExtensionConfiguration()['debugMode']) {
-            return [
-                "uid" => "admin5",
-                "displayName" => "Daniel Pfeil",
-                "givenName" => "Daniel",
-                "sureName" => "Pfeil"
-            ];
-        }
-        /***************************
-         *** Only for developing ***
-         ***************************/
-
         $result = [];
 
         /**
@@ -105,8 +90,6 @@ class ApacheSamlUtility implements SamlUtility
 
             foreach ($data as $field) {
                 if ($field->getValue() != null) {
-                    //$index = $queryBuilderFeUsers->quoteIdentifier($field->getField());
-                    //$values[$index] = $queryBuilderFeUsers->createNamedParameter($field->getValue());
                     $index = $field->getField();
                     $values[$index] = $field->getValue();
                 }
@@ -135,9 +118,7 @@ class ApacheSamlUtility implements SamlUtility
                     ->values($values)
                     ->execute();
             } else {
-                /*$result = $queryBuilderFeUsers->update($tableMapping->getTable())
-                    ->values($values)
-                    ->execute();*/
+                //todo implement update
             }
         }
         //todo make check
