@@ -140,13 +140,24 @@ class ApacheSamlUtility implements SamlUtility
     final public function getDataForTableMapping(Tablemapping $tablemapping, string $prefix): array
     {
         $result = [];
+
         foreach ($tablemapping->getFields() as $field) {
             $fieldValue = new FieldValue();
             $fieldValue->setField($field->getField());
             $fieldValue->setForeignField($field->getForeignField());
-            $fieldValue->setValue($_SERVER[$prefix . $fieldValue->getForeignField()]);
+
+            $key = $prefix . $fieldValue->getForeignField();
+            if(array_key_exists($key, $_SERVER)){
+                $fieldValue->setValue($_SERVER[$key]);
+            } else {
+                if($field->hasFallback()){
+                    $fieldValue->setValue($field->getDefaultvalue());
+                }
+            }
+
             $result[$field->getField()] = $fieldValue;
         }
+
         return $result;
     }
 }

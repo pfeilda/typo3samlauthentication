@@ -39,6 +39,14 @@ class Fieldmapping extends AbstractEntity
      * @var boolean
      */
     protected $identifier = false;
+    /**
+     * @var boolean
+     */
+    protected $fallback = false;
+    /**
+     * @var string
+     */
+    protected $defaultvalue = "";
 
     /**
      * @param int $uid
@@ -57,8 +65,6 @@ class Fieldmapping extends AbstractEntity
     {
         return $this->uid;
     }
-
-
 
     /**
      * @return bool
@@ -122,5 +128,37 @@ class Fieldmapping extends AbstractEntity
     public function setIdentifier(bool $identifier): void
     {
         $this->identifier = $identifier;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFallback(): bool
+    {
+        return $this->fallback;
+    }
+
+    /**
+     * @param bool $fallback
+     */
+    public function setFallback(bool $fallback): void
+    {
+        $this->fallback = $fallback;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultvalue(): string
+    {
+        return $this->defaultvalue;
+    }
+
+    /**
+     * @param string $defaultvalue
+     */
+    public function setDefaultvalue(string $defaultvalue): void
+    {
+        $this->defaultvalue = $defaultvalue;
     }
 }
