@@ -8,14 +8,16 @@ Welcome to TYPO3 SAML Authentication's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Inhalt
 
+   Installation.rst
+   Configuration.rst
+   Usage.rst
 
-General Notes
-=============
-* user gets not actualized if already existing
-* implement checkbox if user must exists
-
+Contribution
+============
+If you want to contribute please contact me daniel.pfeil@itpfeil.de or use github.
+I'm really happy for every input or code or whatever you can contribute.
 
 
 Indices and tables
