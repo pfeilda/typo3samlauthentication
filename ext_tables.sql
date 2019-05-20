@@ -49,6 +49,8 @@ CREATE TABLE 'tx_samlauthentication_domain_model_fieldmapping' (
   identifier   TINYINT(1) DEFAULT 0            NOT NULL,
   field        VARCHAR(255) DEFAULT ''         NOT NULL,
   foreignfield VARCHAR(255) DEFAULT ''         NOT NULL,
+  defaultvalue VARCHAR(255) DEFAULT ''         NOT NULL,
+  fallback     TINYINT(4) UNSIGNED DEFAULT '0' NOT NULL,
 
   PRIMARY KEY (uid),
   KEY parent (pid)

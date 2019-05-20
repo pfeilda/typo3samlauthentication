@@ -21,15 +21,14 @@ return array(
     'ctrl' => array(
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
         'label' => 'field',
-        'iconfile' => '',
+        'iconfile' => 'EXT:samlauthentication/Exticon.svg',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'table ASC',
         'delete' => 'deleted',
         'enablecolumns' => array(
             'disabled' => 'hidden'
-        ),
-        'hideTable' => false
+        )
     ),
     'columns' => array(
         'hidden' => array(
@@ -49,7 +48,8 @@ return array(
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.field',
             'config' => array(
                 'type' => 'select',
-                'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getFields'
+                'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getFields',
+                'renderType' => 'selectSingle'
             )
         ),
         'foreignfield' => array(
@@ -71,6 +71,28 @@ return array(
                     )
                 )
             )
+        ),
+        //stupid name but mysql doesnt accept default
+        'fallback' => array(
+            'exclude' => true,
+            'label' => 'Default',
+            'config' => array(
+                'type' => 'check',
+                'items' => array(
+                    '1' => array(
+                        '0' => 'Benutze Defaultwert'
+                    )
+                )
+            ),
+            'onChange' => 'reload'
+        ),
+        'defaultvalue' => array(
+            'exclude' => false,
+            'label' => 'Default Wert',
+            'config' => array(
+                'type' => 'input',
+            ),
+            'displayCond' => 'FIELD:fallback:=:1'
         )
     ),
     'palettes' => array(
@@ -84,7 +106,7 @@ return array(
         '0' => array(
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    field,foreignfield,identifier,
+                    field,foreignfield,identifier,fallback,defaultvalue,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     '

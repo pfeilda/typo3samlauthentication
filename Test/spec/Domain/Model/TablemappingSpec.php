@@ -16,55 +16,67 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
-/**
- * Created by PhpStorm.
- * User: pfeilda
- * Date: 07.07.18
- * Time: 14:34
- */
-
 namespace spec\DanielPfeil\Samlauthentication\Domain\Model;
 
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
+use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
 use PhpSpec\ObjectBehavior;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class FieldmappingSpec extends ObjectBehavior
+class TablemappingSpec extends ObjectBehavior
 {
-
-    final public function it_is_initializable()
+    final public function it_is_initialisable()
     {
-        $this->shouldHaveType(Fieldmapping::class);
+        $this->shouldBeAnInstanceOf(Tablemapping::class);
+        $this->shouldBeAnInstanceOf(AbstractEntity::class);
     }
 
-    final public function it_is_set_identifier_false()
+    final public function its_field_correct_initialised()
     {
-        $this->setIdentifier(false);
-        $this->isIdentifier()->shouldBe(false);
+        $this->getFields()->count()->shouldBe(0);
     }
 
-    final public function it_is_set_identifier_true()
+    final public function its_get_field()
     {
-        $this->setIdentifier(true);
-        $this->isIdentifier()->shouldBe(true);
+        $this->getFields()->shouldBeAnInstanceOf(ObjectStorage::class);
     }
 
-    final public function it_is_identifier_initial()
+    final public function its_set_fields()
     {
-        $this->isIdentifier()->shouldBe(false);
+        $fieldMapping = new Fieldmapping();
+
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($fieldMapping);
+
+        $this->setFields($objectStorage);
+        $this->getFields()->shouldBe($objectStorage);
     }
 
-
-    final public function it_is_identifier_true()
+    final public function its_get_table_initial()
     {
-        $this->setIdentifier(true);
-        $this->isIdentifier()->shouldBe(true);
+        $this->getTable()->shouldBe("");
     }
 
-    final public function it_is_identifier_false()
+    final public function its_set_table()
     {
-        $this->setIdentifier(false);
-        $this->isIdentifier()->shouldBe(false);
+        $tablename = "test";
+
+        $this->setTable($tablename);
+        $this->getTable()->shouldBe($tablename);
+    }
+
+    final public function its_set_table_fails_with_null(){
+        $this->shouldThrow(\TypeError::class)->duringSetTable(null);
+        $this->getTable()->shouldBe("");
+    }
+
+    final public function its_get_table()
+    {
+        $tablename = "test";
+
+        $this->setTable($tablename);
+        $this->getTable()->shouldBe($tablename);
     }
 
     final public function it_is_set_hidden_false()
@@ -84,7 +96,6 @@ class FieldmappingSpec extends ObjectBehavior
         $this->isHidden()->shouldBe(false);
     }
 
-
     final public function it_is_hidden_true()
     {
         $this->setHidden(true);
@@ -95,44 +106,6 @@ class FieldmappingSpec extends ObjectBehavior
     {
         $this->setHidden(false);
         $this->isHidden()->shouldBe(false);
-    }
-
-    final public function it_is_get_field_initial()
-    {
-        $this->getField()->shouldBe("");
-    }
-
-    final public function it_is_get_field()
-    {
-        $test = "test";
-        $this->setField($test);
-        $this->getField()->shouldBe($test);
-    }
-
-    final public function it_is_set_field()
-    {
-        $test = "test";
-        $this->setField($test);
-        $this->getField()->shouldBe($test);
-    }
-
-    final public function it_is_get_foreign_field_initial()
-    {
-        $this->getForeignfield()->shouldBe("");
-    }
-
-    final public function it_is_get_foreign_field()
-    {
-        $test = "test";
-        $this->setForeignfield($test);
-        $this->getForeignfield()->shouldBe($test);
-    }
-
-    final public function it_is_set_foreign_field()
-    {
-        $test = "test";
-        $this->setForeignfield($test);
-        $this->getForeignfield()->shouldBe($test);
     }
 
     final public function it_is_set_uid_correct()
@@ -175,5 +148,28 @@ class FieldmappingSpec extends ObjectBehavior
         $uid = 10;
         $this->setUid($uid);
         $this->getUid()->shouldBe(10);
+    }
+
+    final public function it_is_add_field_null(){
+        $this->shouldThrow(\TypeError::class)->duringAddField(null);
+    }
+
+    final public function it_is_add_field(){
+        $fieldMapping = new Fieldmapping();
+
+        $this->addField($fieldMapping);
+        $this->getFields()->contains($fieldMapping)->shouldBe(true);
+    }
+
+    final public function it_is_remove_field_null(){
+        $this->shouldThrow(\TypeError::class)->duringRemoveField(null);
+    }
+
+    final public function it_is_remove_field(){
+        $fieldMapping = new Fieldmapping();
+
+        $this->addField($fieldMapping);
+        $this->removeField($fieldMapping);
+        $this->getFields()->contains($fieldMapping)->shouldBe(false);
     }
 }

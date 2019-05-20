@@ -21,15 +21,14 @@ return array(
     'ctrl' => array(
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider',
         'label' => 'title',
-        'iconfile' => '',
+        'iconfile' => 'EXT:samlauthentication/Exticon.svg',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'title ASC',
         'delete' => 'deleted',
         'enablecolumns' => array(
             'disabled' => 'hidden'
-        ),
-        'hideTable' => false
+        )
     ),
     'columns' => array(
         'title' => array(
@@ -57,12 +56,6 @@ return array(
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '0',
-                'show_thumbs' => '1',
-                'wizards' => array(
-                    'suggest' => array(
-                        'type' => 'suggest'
-                    )
-                )
             ),
         ),
         'type' => array(
@@ -73,7 +66,6 @@ return array(
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['Apache2 Shibboleth SP', 1],
-                    ['OpenSAML', 2]
                 ],
                 'minitems' => 1,
                 'maxitems' => 1

@@ -28,7 +28,6 @@ namespace DanielPfeil\Samlauthentication\Utility;
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
 use DanielPfeil\Samlauthentication\Domain\Model\FieldValue;
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
-use DanielPfeil\Samlauthentication\Domain\Model\Session;
 use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -49,29 +48,8 @@ class ApacheSamlUtility implements SamlUtility
         return null;
     }
 
-    public function getSession(): Session
-    {
-        // TODO: Implement getSession() method.
-        return null;
-    }
-
     public function getUserData(Serviceprovider $serviceprovider): array
     {
-        /***************************
-         *** Only for developing ***
-         ***************************/
-        if ((bool)FactoryUtility::getExtensionConfiguration()['debugMode']) {
-            return [
-                "uid" => "admin5",
-                "displayName" => "Daniel Pfeil",
-                "givenName" => "Daniel",
-                "sureName" => "Pfeil"
-            ];
-        }
-        /***************************
-         *** Only for developing ***
-         ***************************/
-
         $result = [];
 
         /**
@@ -112,8 +90,6 @@ class ApacheSamlUtility implements SamlUtility
 
             foreach ($data as $field) {
                 if ($field->getValue() != null) {
-                    //$index = $queryBuilderFeUsers->quoteIdentifier($field->getField());
-                    //$values[$index] = $queryBuilderFeUsers->createNamedParameter($field->getValue());
                     $index = $field->getField();
                     $values[$index] = $field->getValue();
                 }
@@ -142,11 +118,8 @@ class ApacheSamlUtility implements SamlUtility
                     ->values($values)
                     ->execute();
             } else {
-                /*$result = $queryBuilderFeUsers->update($tableMapping->getTable())
-                    ->values($values)
-                    ->execute();*/
+                //todo implement update
             }
-            //DebuggerUtility::var_dump($result);
         }
         //todo make check
         return true;
@@ -167,13 +140,24 @@ class ApacheSamlUtility implements SamlUtility
     final public function getDataForTableMapping(Tablemapping $tablemapping, string $prefix): array
     {
         $result = [];
+
         foreach ($tablemapping->getFields() as $field) {
             $fieldValue = new FieldValue();
             $fieldValue->setField($field->getField());
             $fieldValue->setForeignField($field->getForeignField());
-            $fieldValue->setValue($_SERVER[$prefix . $fieldValue->getForeignField()]);
+
+            $key = $prefix . $fieldValue->getForeignField();
+            if(array_key_exists($key, $_SERVER)){
+                $fieldValue->setValue($_SERVER[$key]);
+            } else {
+                if($field->hasFallback()){
+                    $fieldValue->setValue($field->getDefaultvalue());
+                }
+            }
+
             $result[$field->getField()] = $fieldValue;
         }
+
         return $result;
     }
 }
