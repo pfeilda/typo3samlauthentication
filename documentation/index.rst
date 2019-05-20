@@ -13,6 +13,7 @@ Welcome to TYPO3 SAML Authentication's documentation!
    Installation.rst
    Configuration.rst
    Usage.rst
+   BugsAndFeatureRequests.rst
 
 Contribution
 ============
