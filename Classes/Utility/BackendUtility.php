@@ -70,7 +70,7 @@ class BackendUtility
         foreach ($fields as $field) {
             $params["items"][] = [
                 $field['Field'],
-                $field['Field']
+                $field['Field'],
             ];
         }
     }
@@ -91,6 +91,6 @@ class BackendUtility
      */
     private function saveValues(array $fieldMapping, Tablemapping $tablemapping): bool
     {
-        
+
     }
 }

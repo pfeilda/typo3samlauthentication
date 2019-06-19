@@ -57,7 +57,7 @@ class Tablemapping extends AbstractEntity
     /**
      * @return int
      */
-    public function getUid(): ?int
+    public function getUid(): int
     {
         return $this->uid;
     }
@@ -95,7 +95,7 @@ class Tablemapping extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping>
+     * @return ObjectStorage<Fieldmapping>
      */
     public function getFields(): ObjectStorage
     {
@@ -103,7 +103,7 @@ class Tablemapping extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping> $fields
+     * @param ObjectStorage<Fieldmapping> $fields
      */
     public function setFields(ObjectStorage $fields)
     {

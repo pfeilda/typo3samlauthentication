@@ -17,8 +17,8 @@
  *
  */
 
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider',
         'label' => 'title',
         'iconfile' => 'EXT:samlauthentication/Exticon.svg',
@@ -26,114 +26,114 @@ return array(
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'title ASC',
         'delete' => 'deleted',
-        'enablecolumns' => array(
-            'disabled' => 'hidden'
-        )
-    ),
-    'columns' => array(
-        'title' => array(
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+    ],
+    'columns' => [
+        'title' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.title',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
-                'eval' => 'trim,required,alphanum'
-            )
-        ),
-        'identityprovider' => array(
+                'eval' => 'trim,required,alphanum',
+            ],
+        ],
+        'identityprovider' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.identityprovider',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
-                'eval' => 'trim,required'
-            )
-        ),
-        'destinationpid' => array(
+                'eval' => 'trim,required',
+            ],
+        ],
+        'destinationpid' => [
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.destinationpid',
-            'config' => array(
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '0',
-            ),
-        ),
-        'type' => array(
+            ],
+        ],
+        'type' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.type',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['Apache2 Shibboleth SP', 1],
                 ],
                 'minitems' => 1,
-                'maxitems' => 1
-            ),
-            'onChange' => 'reload'
-        ),
-        'prefix' => array(
+                'maxitems' => 1,
+            ],
+            'onChange' => 'reload',
+        ],
+        'prefix' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.prefix',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'eval' => 'trim',
-            ),
-            'displayCond' => 'FIELD:type:=:1'
-        ),
-        'context' => array(
+            ],
+            'displayCond' => 'FIELD:type:=:1',
+        ],
+        'context' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.context',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['Frontend', 'FE'],
                     ['Backend', 'BE'],
-                    ['Frontend and Backend', 'FB']
+                    ['Frontend and Backend', 'FB'],
                 ],
                 'minitems' => 1,
-                'maxitems' => 1
-            )
-        ),
-        'tablemapping' => array(
+                'maxitems' => 1,
+            ],
+        ],
+        'tablemapping' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping',
-            'config' => array(
+            'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_samlauthentication_domain_model_tablemapping',
                 'foreign_field' => 'serviceprovider',
                 'foreign_label' => 'table',
-            )
-        ),
-        'hidden' => array(
+            ],
+        ],
+        'hidden' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-                'items' => array(
-                    '1' => array(
-                        '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0'
-                    )
-                )
-            )
-        )
-    ),
-    'palettes' => array(
-        'hidden' => array(
+                'items' => [
+                    '1' => [
+                        '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0',
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'palettes' => [
+        'hidden' => [
             'showitem' => '
                 hidden;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:field.default.hidden
             ',
-        ),
-    ),
-    'types' => array(
-        '0' => array(
+        ],
+    ],
+    'types' => [
+        '0' => [
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
                     title,type,identityprovider,prefix,context,tablemapping,destinationpid,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
-                    '
-        )
-    )
-);
+                    ',
+        ],
+    ],
+];

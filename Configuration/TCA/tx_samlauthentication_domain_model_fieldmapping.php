@@ -17,8 +17,8 @@
  *
  */
 
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
         'label' => 'field',
         'iconfile' => 'EXT:samlauthentication/Exticon.svg',
@@ -26,90 +26,90 @@ return array(
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'table ASC',
         'delete' => 'deleted',
-        'enablecolumns' => array(
-            'disabled' => 'hidden'
-        )
-    ),
-    'columns' => array(
-        'hidden' => array(
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-                'items' => array(
-                    '1' => array(
-                        '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0'
-                    )
-                )
-            )
-        ),
-        'field' => array(
+                'items' => [
+                    '1' => [
+                        '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0',
+                    ],
+                ],
+            ],
+        ],
+        'field' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.field',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getFields',
-                'renderType' => 'selectSingle'
-            )
-        ),
-        'foreignfield' => array(
+                'renderType' => 'selectSingle',
+            ],
+        ],
+        'foreignfield' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.foreignfield',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
-                'eval' => 'trim,required'
-            )
-        ),
-        'identifier' => array(
+                'eval' => 'trim,required',
+            ],
+        ],
+        'identifier' => [
             'exclude' => false,
             'label' => 'Identifier',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-                'items' => array(
-                    '1' => array(
-                        '0' => 'Identifier'
-                    )
-                )
-            )
-        ),
+                'items' => [
+                    '1' => [
+                        '0' => 'Identifier',
+                    ],
+                ],
+            ],
+        ],
         //stupid name but mysql doesnt accept default
-        'fallback' => array(
+        'fallback' => [
             'exclude' => true,
             'label' => 'Default',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-                'items' => array(
-                    '1' => array(
-                        '0' => 'Benutze Defaultwert'
-                    )
-                )
-            ),
-            'onChange' => 'reload'
-        ),
-        'defaultvalue' => array(
+                'items' => [
+                    '1' => [
+                        '0' => 'Benutze Defaultwert',
+                    ],
+                ],
+            ],
+            'onChange' => 'reload',
+        ],
+        'defaultvalue' => [
             'exclude' => false,
             'label' => 'Default Wert',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
-            ),
-            'displayCond' => 'FIELD:fallback:=:1'
-        )
-    ),
-    'palettes' => array(
-        'hidden' => array(
+            ],
+            'displayCond' => 'FIELD:fallback:=:1',
+        ],
+    ],
+    'palettes' => [
+        'hidden' => [
             'showitem' => '
                 hidden;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:field.default.hidden
             ',
-        ),
-    ),
-    'types' => array(
-        '0' => array(
+        ],
+    ],
+    'types' => [
+        '0' => [
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
                     field,foreignfield,identifier,fallback,defaultvalue,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
-                    '
-        )
-    )
-);
+                    ',
+        ],
+    ],
+];

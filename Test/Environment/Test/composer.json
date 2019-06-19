@@ -1,10 +1,16 @@
 {
   "repositories": [
-    { "type": "composer", "url": "https://composer.typo3.org/" },
-    { "type": "vcs", "url": "https://github.com/pfeilda/typo3samlauthentication" }
+    {
+      "type": "composer",
+      "url": "https://composer.typo3.org/"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/pfeilda/typo3samlauthentication"
+    }
   ],
   "name": "typo3/cms-base-distribution",
-  "description" : "TYPO3 CMS Base Distribution",
+  "description": "TYPO3 CMS Base Distribution",
   "license": "GPL-2.0-or-later",
   "config": {
     "platform": {
@@ -32,9 +38,9 @@
     "typo3/cms-t3editor": "^9.5",
     "typo3/cms-tstemplate": "^9.5",
     "typo3/cms-viewpage": "^9.5",
-    "daniel-pfeil/samlauthentication":"dev-release/2.0.0"
+    "daniel-pfeil/samlauthentication": "dev-release/2.0.0"
   },
-  "scripts":{
+  "scripts": {
     "typo3-cms-scripts": [
       "typo3cms install:fixfolderstructure",
       "typo3cms install:generatepackagestates"

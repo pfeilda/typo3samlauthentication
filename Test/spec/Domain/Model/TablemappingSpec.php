@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 namespace spec\DanielPfeil\Samlauthentication\Domain\Model;
 
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
@@ -66,7 +67,8 @@ class TablemappingSpec extends ObjectBehavior
         $this->getTable()->shouldBe($tablename);
     }
 
-    final public function its_set_table_fails_with_null(){
+    final public function its_set_table_fails_with_null()
+    {
         $this->shouldThrow(\TypeError::class)->duringSetTable(null);
         $this->getTable()->shouldBe("");
     }
@@ -150,22 +152,26 @@ class TablemappingSpec extends ObjectBehavior
         $this->getUid()->shouldBe(10);
     }
 
-    final public function it_is_add_field_null(){
+    final public function it_is_add_field_null()
+    {
         $this->shouldThrow(\TypeError::class)->duringAddField(null);
     }
 
-    final public function it_is_add_field(){
+    final public function it_is_add_field()
+    {
         $fieldMapping = new Fieldmapping();
 
         $this->addField($fieldMapping);
         $this->getFields()->contains($fieldMapping)->shouldBe(true);
     }
 
-    final public function it_is_remove_field_null(){
+    final public function it_is_remove_field_null()
+    {
         $this->shouldThrow(\TypeError::class)->duringRemoveField(null);
     }
 
-    final public function it_is_remove_field(){
+    final public function it_is_remove_field()
+    {
         $fieldMapping = new Fieldmapping();
 
         $this->addField($fieldMapping);

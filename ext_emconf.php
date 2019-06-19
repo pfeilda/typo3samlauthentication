@@ -17,17 +17,17 @@
  *
  */
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
     'title' => 'SAML Authentication',
     'description' => 'This extension adds a authentication method for SAML with different service provider.',
     'version' => '2.0.1',
     'category' => 'services',
-    'constraints' => array(
-        'depends' => array(
-            'typo3' => '8.7.0-9.5.7'
-        )
-    ),
+    'constraints' => [
+        'depends' => [
+            'typo3' => '8.7.0-9.5.7',
+        ],
+    ],
     'state' => 'stable',
     'author' => 'Daniel Pfeil',
-    'author_email' => 'daniel.pfeil@itpfeil.de'
-);
+    'author_email' => 'daniel.pfeil@itpfeil.de',
+];

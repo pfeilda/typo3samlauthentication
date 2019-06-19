@@ -37,7 +37,7 @@ class FieldValue
     /**
      * @return string
      */
-    public function getValue(): ?string
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -45,7 +45,7 @@ class FieldValue
     /**
      * @param string $value
      */
-    public function setValue(?string $value): void
+    public function setValue(string $value)
     {
         $this->value = $value;
     }
@@ -61,7 +61,7 @@ class FieldValue
     /**
      * @param string $field
      */
-    public function setField(string $field): void
+    public function setField(string $field)
     {
         $this->field = $field;
     }
@@ -77,7 +77,7 @@ class FieldValue
     /**
      * @param string $foreignField
      */
-    public function setForeignField(string $foreignField): void
+    public function setForeignField(string $foreignField)
     {
         $this->foreignField = $foreignField;
     }

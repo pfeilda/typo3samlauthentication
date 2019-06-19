@@ -17,8 +17,8 @@
  *
  */
 
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping',
         'label' => 'table',
         'iconfile' => 'EXT:samlauthentication/Exticon.svg',
@@ -26,58 +26,58 @@ return array(
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'table ASC',
         'delete' => 'deleted',
-        'enablecolumns' => array(
-            'disabled' => 'hidden'
-        )
-    ),
-    'columns' => array(
-        'hidden' => array(
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-                'items' => array(
-                    '1' => array(
-                        '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0'
-                    )
-                )
-            )
-        ),
-        'table' => array(
+                'items' => [
+                    '1' => [
+                        '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0',
+                    ],
+                ],
+            ],
+        ],
+        'table' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:tableMapping.table',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'itemsProcFunc' => 'DanielPfeil\\Samlauthentication\\Utility\\BackendUtility->getTables',
-                'renderType' => 'selectSingle'
-            )
-        ),
-        'fields' => array(
+                'renderType' => 'selectSingle',
+            ],
+        ],
+        'fields' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
-            'config' => array(
+            'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_samlauthentication_domain_model_fieldmapping',
                 'foreign_field' => 'table',
                 'foreign_label' => 'field',
-            )
-        ),
-    ),
-    'palettes' => array(
-        'hidden' => array(
+            ],
+        ],
+    ],
+    'palettes' => [
+        'hidden' => [
             'showitem' => '
                 hidden;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:field.default.hidden
             ',
-        ),
-    ),
-    'types' => array(
-        '0' => array(
+        ],
+    ],
+    'types' => [
+        '0' => [
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
                     table,fields,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
-                    '
-        )
-    )
-);
+                    ',
+        ],
+    ],
+];

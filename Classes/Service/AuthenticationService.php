@@ -22,12 +22,11 @@ namespace DanielPfeil\Samlauthentication\Service;
 use DanielPfeil\Samlauthentication\Enum\AuthenticationStatus;
 use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
 use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
 {
-    final public function authUser(array $user):int
+    final public function authUser(array $user): int
     {
         $serviceProviderUtility = ServiceProviderUtility::getInstance();
 
@@ -54,7 +53,7 @@ final class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
     {
         //todo check if parent is needed before or after?
         $user = parent::getUser();
-        if(!$user){
+        if (!$user) {
             try {
                 $serviceProviderUtility = ServiceProviderUtility::getInstance();
                 $activeServiceProviders = $serviceProviderUtility->getActive(FactoryUtility::getServiceProviderModels());

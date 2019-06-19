@@ -21,7 +21,7 @@
     $_EXTKEY,
     'auth',
     \DanielPfeil\Samlauthentication\Service\AuthenticationService::class,
-    array(
+    [
         'title' => 'Authentication service',
         'description' => 'Authentication with over a Service Provider.',
 
@@ -31,6 +31,6 @@
         'priority' => 100,
         'quality' => 100,
 
-        'className' => 'DanielPfeil\\Samlauthentication\\Service\\AuthenticationService'
-    )
+        'className' => 'DanielPfeil\\Samlauthentication\\Service\\AuthenticationService',
+    ]
 );

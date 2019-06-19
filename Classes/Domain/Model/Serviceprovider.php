@@ -54,7 +54,7 @@ class Serviceprovider extends AbstractEntity
      */
     protected $prefix = "";
     /**
-     * @var ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Tablemapping>
+     * @var ObjectStorage<Tablemapping>
      */
     protected $tablemapping = null;
 
@@ -76,7 +76,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @return int
      */
-    public function getUid(): ?int
+    public function getUid(): int
     {
         return $this->uid;
     }
@@ -164,7 +164,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @return String
      */
-    public function getContext(): String
+    public function getContext(): string
     {
         return $this->context;
     }
@@ -172,7 +172,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param String $context
      */
-    public function setContext(String $context)
+    public function setContext(string $context)
     {
         $this->context = $context;
     }
@@ -180,7 +180,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @return string
      */
-    public function getPrefix(): ?string
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
@@ -188,13 +188,13 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param string $prefix
      */
-    public function setPrefix(?string $prefix)
+    public function setPrefix(string $prefix)
     {
         $this->prefix = $prefix;
     }
 
     /**
-     * @return ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Tablemapping>
+     * @return ObjectStorage<Tablemapping>
      */
     public function getTablemapping(): ObjectStorage
     {
@@ -202,7 +202,7 @@ class Serviceprovider extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage<\DanielPfeil\Samlauthentication\Domain\Model\Tablemapping> $tablemapping
+     * @param ObjectStorage<Tablemapping> $tablemapping
      */
     public function setTablemapping(ObjectStorage $tablemapping)
     {

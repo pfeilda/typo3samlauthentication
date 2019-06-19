@@ -9,17 +9,17 @@
     "authentication",
     "serviceprovider"
   ],
-  "license":"GPL-3.0-only",
+  "license": "GPL-3.0-only",
   "version": "2.0.1",
   "require": {
-    "typo3/cms-core": ">=8.6.0",
+    "typo3/minimal": ">=8.6.0",
     "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0",
-    "php":"^7"
+    "php": "^7.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
     "phpspec/phpspec": "^4.0",
-    "leanphp/phpspec-code-coverage":"^4.1"
+    "leanphp/phpspec-code-coverage": "^4.1"
   },
   "autoload": {
     "psr-4": {

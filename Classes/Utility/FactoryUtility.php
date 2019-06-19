@@ -69,8 +69,8 @@ abstract class FactoryUtility
         return $serviceProvidersArray;
     }
 
-    private static function getServiceProviderObjectWithoutTablemappingFromArray(array $serviceProviderArray): Serviceprovider
-    {
+    private static function getServiceProviderObjectWithoutTablemappingFromArray(array $serviceProviderArray
+    ): Serviceprovider {
         $serviceProvider = new Serviceprovider();
 
         $serviceProvider->setUid($serviceProviderArray["uid"]);

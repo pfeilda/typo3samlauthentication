@@ -85,7 +85,7 @@ class ApacheSamlUtility implements SamlUtility
 
             $values = [
                 "tstamp" => time(),
-                "pid" => $serviceprovider->getDestinationpid()
+                "pid" => $serviceprovider->getDestinationpid(),
             ];
 
             foreach ($data as $field) {
@@ -147,10 +147,10 @@ class ApacheSamlUtility implements SamlUtility
             $fieldValue->setForeignField($field->getForeignField());
 
             $key = $prefix . $fieldValue->getForeignField();
-            if(array_key_exists($key, $_SERVER)){
+            if (array_key_exists($key, $_SERVER)) {
                 $fieldValue->setValue($_SERVER[$key]);
             } else {
-                if($field->hasFallback()){
+                if ($field->hasFallback()) {
                     $fieldValue->setValue($field->getDefaultvalue());
                 }
             }
