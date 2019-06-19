@@ -2,3 +2,5 @@
 /.idea
 /documentation/_build
 .DS_Store
+/vendor
+/public
