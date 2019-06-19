@@ -9,12 +9,17 @@
     "authentication",
     "serviceprovider"
   ],
+  "config": {
+    "platform": {
+      "php": "7.1"
+    }
+  },
   "license": "GPL-3.0-only",
   "version": "2.0.1",
   "require": {
     "typo3/minimal": ">=8.6.0",
     "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0",
-    "php": "^7.0"
+    "php": "^7.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
