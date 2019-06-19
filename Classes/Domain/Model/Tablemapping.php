@@ -57,7 +57,7 @@ class Tablemapping extends AbstractEntity
     /**
      * @return int
      */
-    public function getUid(): int
+    public function getUid()
     {
         return $this->uid;
     }

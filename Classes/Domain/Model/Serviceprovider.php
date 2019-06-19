@@ -66,7 +66,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param int $uid
      */
-    public function setUid(int $uid)
+    public function setUid($uid)
     {
         if (!$this->uid && $uid > 0) {
             $this->uid = $uid;
@@ -76,7 +76,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @return int
      */
-    public function getUid(): int
+    public function getUid()
     {
         return $this->uid;
     }

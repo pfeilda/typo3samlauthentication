@@ -22,7 +22,7 @@ namespace DanielPfeil\Samlauthentication\Domain\Model;
 class FieldValue
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $value;
     /**
@@ -35,17 +35,17 @@ class FieldValue
     private $foreignField;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getValue(): string
+    public function getValue()
     {
         return $this->value;
     }
 
     /**
-     * @param string $value
+     * @param $value
      */
-    public function setValue(string $value)
+    public function setValue($value)
     {
         $this->value = $value;
     }

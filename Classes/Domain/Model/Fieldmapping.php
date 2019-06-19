@@ -49,9 +49,9 @@ class Fieldmapping extends AbstractEntity
     protected $defaultvalue = "";
 
     /**
-     * @param int $uid
+     * @param $uid
      */
-    public function setUid(int $uid)
+    public function setUid($uid)
     {
         if (!$this->uid && $uid > 0) {
             $this->uid = $uid;
@@ -61,7 +61,7 @@ class Fieldmapping extends AbstractEntity
     /**
      * @return int|null
      */
-    public function getUid(): int
+    public function getUid()
     {
         return $this->uid;
     }
