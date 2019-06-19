@@ -7,9 +7,6 @@ suites:
 extensions:
   LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
     lower_upper_bound: 0
-    format: [
-      html,
-      text
-    ]
+    format: [html, text]
     whitelist:
       - Classes
