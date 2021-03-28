@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  web:
+    image: martinhelmich/typo3:10
+    user: "www-data:www-data"
+    volumes:
+      - ./:/var/www/html/typo3conf/ext/samlauthentication:rw
+    depends_on:
+      - db
+    ports:
+      - 80:80
+
+  db:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: yoursupersecretpassword
+      MYSQL_PASSWORD: yoursupersecretpassword
+      MYSQL_DATABASE: typo3
+      MYSQL_USER: typo3
