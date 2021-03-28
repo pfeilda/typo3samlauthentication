@@ -18,7 +18,7 @@
  */
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService(
-    $_EXTKEY,
+    'samlauthentication',
     'auth',
     \DanielPfeil\Samlauthentication\Service\AuthenticationService::class,
     [
