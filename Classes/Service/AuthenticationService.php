@@ -24,7 +24,7 @@ use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
 use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
-final class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
+final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\AbstractAuthenticationService
 {
     final public function authUser(array $user): int
     {
@@ -49,14 +49,15 @@ final class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
         return AuthenticationStatus::FAIL_CONTINUE;
     }
 
-    public function getUser()
+    final public function getUser()
     {
         //todo check if parent is needed before or after?
-        $user = parent::getUser();
+        $user = parent::fetchUserRecord($this->login["uname"]);
         if (!$user) {
             try {
                 $serviceProviderUtility = ServiceProviderUtility::getInstance();
                 $activeServiceProviders = $serviceProviderUtility->getActive(FactoryUtility::getServiceProviderModels());
+
                 foreach ($activeServiceProviders as $activeServiceProvider) {
                     $samlComponent = FactoryUtility::getSAMLUtility($activeServiceProvider);
                     $storedSuccessfull = $samlComponent->saveUserData($activeServiceProvider);
@@ -65,7 +66,7 @@ final class AuthenticationService extends \TYPO3\CMS\Sv\AuthenticationService
                     }
                 }
 
-                $user = parent::getUser();
+                $user = parent::fetchUserRecord($this->login["uname"]);
             } catch (\Exception $exception) {
                 //TODO implement
                 DebuggerUtility::var_dump($exception);
