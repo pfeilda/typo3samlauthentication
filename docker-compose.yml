@@ -2,7 +2,8 @@ version: "3"
 
 services:
   web:
-    image: martinhelmich/typo3:10
+    build:
+      context: .
     user: "www-data:www-data"
     volumes:
       - ./:/var/www/html/typo3conf/ext/samlauthentication:rw
