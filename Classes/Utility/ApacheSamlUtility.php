@@ -67,9 +67,6 @@ class ApacheSamlUtility implements SamlUtility
 
     public function saveUserData(Serviceprovider $serviceprovider): bool
     {
-        /**
-         * @var ObjectStorage<Tablemapping> $tableMappings
-         */
         $tableMappings = $serviceprovider->getTablemapping();
         /**
          * @var Tablemapping $tableMapping

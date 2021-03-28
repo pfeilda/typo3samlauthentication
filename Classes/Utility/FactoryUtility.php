@@ -33,6 +33,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 abstract class FactoryUtility
 {
@@ -61,11 +62,13 @@ abstract class FactoryUtility
             ->from('tx_samlauthentication_domain_model_serviceprovider')
             ->execute();
         $serviceProvidersArray = $serviceProviders->fetchAll();
+        //Todo check if no mappin available
         foreach ($serviceProvidersArray as $key => $value) {
             $serviceProvider = self::getServiceProviderObjectWithoutTablemappingFromArray($value);
             $serviceProvider->setTablemapping(self::getTableMappingObjectStorageForServiceProvider($serviceProvider));
             $serviceProvidersArray[$key] = $serviceProvider;
         }
+
         return $serviceProvidersArray;
     }
 
@@ -142,6 +145,7 @@ abstract class FactoryUtility
             )
             ->from('tx_samlauthentication_domain_model_tablemapping')
             ->execute()->fetchAll();
+
         foreach ($tableMappingsArray as $key => $value) {
             $tableMapping = self::getTableMappingFromArrayWithoutFieldMapping($value);
             $tableMapping->setFields(self::getFieldMappingObjectStorageForTableMapping($tableMapping));

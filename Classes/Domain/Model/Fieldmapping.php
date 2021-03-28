@@ -61,7 +61,7 @@ class Fieldmapping extends AbstractEntity
     /**
      * @return int|null
      */
-    public function getUid()
+    public function getUid() : ?int
     {
         return $this->uid;
     }

@@ -21,6 +21,7 @@ namespace DanielPfeil\Samlauthentication\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 //todo add aditional fields defined in tables.sql
 class Serviceprovider extends AbstractEntity
@@ -74,9 +75,9 @@ class Serviceprovider extends AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getUid()
+    public function getUid() : ?int
     {
         return $this->uid;
     }
