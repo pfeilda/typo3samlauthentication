@@ -20,9 +20,9 @@ jobs:
       deploy:
         provider: pages
         skip_cleanup: true
-        github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+        github_token: $GITHUB_TOKEN
         keep_history: true
         local_dir: documentation/_build
         verbose: true
         on:
-          all_branches: true
+          branch: master
