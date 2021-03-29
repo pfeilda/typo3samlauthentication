@@ -1,8 +1,0 @@
-/coverage
-/.idea
-/documentation/_build
-.DS_Store
-/vendor
-/public
-index.php
-/typo3

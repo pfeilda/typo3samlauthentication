@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="book-name"    content="TYPO3 SAML Authentication"/>
+  <meta name="book-version" content=""/>
+  <meta name="book-release" content="2.0.0"/>
+  <meta name="book-type"    content="Manual"/>
+
+  
+  <title>Configuration &mdash; TYPO3 SAML Authentication 2.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/jquery-ui/jquery-ui.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/css/t3more.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="TYPO3 SAML Authentication 2.0.0 documentation" href="#"/>
+        <link rel="next" title="Usage" href="Usage.html"/>
+        <link rel="prev" title="Installation" href="Installation.html"/> 
+  <script src="_static/js/modernizr.min.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        <ul class="sidebartop">
+
+          <li class="docsite">
+            <a href="https://docs.typo3.org"><img src="_static/img/typo3-documentation.png" class="logo" /></a>
+          </li><li class="project">
+            <a href="index.html">
+              TYPO3 SAML Authentication<br>2.0.0</a>
+          </li>
+          <li class="nolink search"><div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search this project" id="searchinput" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+</li></ul>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">Inhalt</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#prerequirements">Prerequirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#extension-installation">Extension Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#service-provider">Service Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table-mapping">Table mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#field-mapping">Field mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BugsAndFeatureRequests.html">Bugs and feature requests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="BugsAndFeatureRequests.html#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BugsAndFeatureRequests.html#feature-mapping">Feature mapping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="BugsAndFeatureRequests.html#first-safe-error-bug">First safe error (Bug)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">TYPO3 SAML Authentication</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    <li>Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Configuration.rst.txt" rel="nofollow">
+                <span class="fa fa-binoculars"></span>&#32;View page source
+            </a>
+      </li>
+  </ul>
+  
+    <hr class="before-stealth-btn clear-both" />
+    
+      <a href="Usage.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">
+          <span class="stealth-btn-text">Next</span>
+          <span class="fa fa-arrow-circle-right"></span>
+      </a>
+    
+    
+      <a href="Installation.html" class="stealth-btn" title="Accesskey Alt(+Shift)+p">
+          <span class="fa fa-arrow-circle-left"></span>
+          <span class="stealth-btn-text">Previous</span>
+      </a>
+    
+
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody" class="toBeIndexed">
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="service-provider">
+<h2>Service Provider<a class="headerlink" href="#service-provider" title="Permalink to this headline">¶</a></h2>
+<p>If you want to add a new configuration to use a service provider, it is possible to add this as new record in the list
+view.
+The serviceprovider is located under SAML Authentcation.</p>
+<p>There are several fields. After you filled in the first data and saved it for the first time, maybe there comes some
+additional fields. For example if you choose the Apache2 Shibbolet SP the field Prefix will show up.</p>
+<img alt="_images/Serviceprovider.png" src="_images/Serviceprovider.png" />
+<dl class="simple">
+<dt>Title</dt><dd><p>In this field you can enter a title for the Configuration.</p>
+</dd>
+<dt>Type</dt><dd><p>Currently there is only the Apache version available. So there is only the possibility to communicate with the
+Service Provider on your system over environment variables.</p>
+</dd>
+<dt>Identityprovider</dt><dd><p>Here you have to fill in the correct value title of your Identityprovider. (For the Apache2 ServiceProvider the fieldname is
+‘Shib-Identity-Provider’)</p>
+</dd>
+<dt>Context</dt><dd><p>This select field let you choose wether the Service Provider should only work for frontend, backend or booth.</p>
+</dd>
+<dt>Table Mapping</dt><dd><p>Here you have to add the mappings from the Service Provider Data to the TYPO3 Tables.</p>
+</dd>
+<dt>Destination PID</dt><dd><p>This is the page where the users should be stored.</p>
+</dd>
+<dt>Prefix</dt><dd><p>If you prefix your variables, this prefix can be added here.</p>
+</dd>
+<dt>Access</dt><dd><p>With this field you can regulate wether this entry should be active or not.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="table-mapping">
+<h2>Table mapping<a class="headerlink" href="#table-mapping" title="Permalink to this headline">¶</a></h2>
+<p>You are able to insert data in every table which is accessable by TYPO3.</p>
+<img alt="_images/Tablemapping.png" src="_images/Tablemapping.png" />
+<dl class="simple">
+<dt>Table Name</dt><dd><p>Here you have to choose the table in which you want to insert.</p>
+</dd>
+<dt>Field mapping</dt><dd><p>Now you can add for every field a mapping rule.</p>
+</dd>
+<dt>Access</dt><dd><p>With this field you can regulate wether this entry should be active or not.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="field-mapping">
+<h2>Field mapping<a class="headerlink" href="#field-mapping" title="Permalink to this headline">¶</a></h2>
+<p>With this you can map the values from the Service Provider to the fields of the table.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>There exists an error when you safe the first time. These error is not a problem but I wasn’t able to remove it.
+You can read more here: <a class="reference internal" href="BugsAndFeatureRequests.html#bugs-and-feature-request-label"><span class="std std-ref">Bugs and feature requests</span></a>.</p>
+</div>
+<img alt="_images/FieldMapping.png" src="_images/FieldMapping.png" />
+<dl class="simple">
+<dt>Field</dt><dd><p>The field name in the table. Before you haven’t safed it there will no fields will be shown.</p>
+</dd>
+<dt>Foreign field</dt><dd><p>The field name in the collection of foreign fields.</p>
+</dd>
+<dt>Identifier</dt><dd><p>The checkbox value should only used once and represent the field which should used as identifier.
+(I hadn’t tried it multi times.)</p>
+</dd>
+<dt>Default</dt><dd><p>If this checkbox is checked then a input field will appear where you are able to fill in any default Value</p>
+</dd>
+<dt>Access</dt><dd><p>With this field you can regulate wether this entry should be active or not.</p>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to save new users in the database you have to add at least one group to the user. Because if a user
+doesn’t have a group he will not be able to login.</p>
+</div>
+</div>
+</div>
+
+
+           </div><!-- /.toBeIndexed -->
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Usage.html" class="btn btn-neutral float-right" title="Accesskey Alt(+Shift)+n" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Installation.html" class="btn btn-neutral" title="Accesskey Alt(+Shift)+p" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="contentinfo">
+      <p class="show_source">
+        <a href="_sources/Configuration.rst.txt" rel="nofollow">
+          <span class="fa fa-binoculars"></span>&#32;View page source
+        </a>
+      </p>
+      <p class="show_copyright">
+            &copy; Copyright 2018, Daniel Pfeil
+      </p>
+      <p class="show_sphinx">
+        Built with <a href="http://sphinx-doc.org/" target="_blank">Sphinx</a> and
+        <a href="https://github.com/TYPO3-Documentation/t3SphinxThemeRtd" target="_blank">t3SphinxThemeRtd.</a>
+        Report theme issues <a href="https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/issues" target="_blank">here.</a>
+      </p>
+      <p class="show_legalinfo">
+        <a href="https://typo3.org/legal-info/" rel="nofollow">
+          <span class="fa fa-legal"></span>&#32;Legal Info
+        </a>
+      </p>
+
+
+
+
+  </div>
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/jquery-ui/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="_static/js/theme.js"></script>
+      <script type="text/javascript" src="_static/js/t3autocomplete.js"></script>
+
+  
+
+  
+   
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   <script type="text/javascript" id="idPiwikScriptPlaceholder"></script></body>
+</html>
