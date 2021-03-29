@@ -10,7 +10,7 @@
     "serviceprovider"
   ],
   "license": "GPL-3.0-only",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "require": {
     "typo3/minimal": ">=9",
     "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0"
