@@ -24,7 +24,7 @@ $EM_CONF["samlauthentication"] = [
     'category' => 'services',
     'constraints' => [
         'depends' => [
-            'typo3' => '8.7.0-10.4.14',
+            'typo3' => '9.0.0-10.4.14',
         ],
     ],
     'state' => 'stable',

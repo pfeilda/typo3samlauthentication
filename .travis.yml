@@ -1,16 +1,26 @@
-language: php
+jobs:
+  include:
+    - language: php
+      php:
+      - 7.3
+      before_script:
+        - travis_retry composer install --prefer-source --no-interaction --dev
+      script:
+        -  XDEBUG_MODE=coverage ./vendor/bin/phpspec run --config=phpspec.yml --no-interaction -v
+    - language: python
+      python: 3.9
+      before_script:
+        - cd documentation
+        - pip install -r requirements.txt
+      script:
+        - sphinx-build ./ ./_build
 
-php:
-  - 7.3
-before_script:
-  - travis_retry composer install --prefer-source --no-interaction --dev
-script:
-  -  XDEBUG_MODE=coverage ./vendor/bin/phpspec run --config=phpspec.yml --no-interaction -v
-
-deploy:
-  provider: pages
-  cleanup: false
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  on:
-    branch: main
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        keep_history: true
+        local_dir: documentation/_build
+        verbose: true
+        on:
+          branch: master
