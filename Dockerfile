@@ -8,4 +8,4 @@ RUN echo "SetEnv AJP_sn Mustermann" >> /etc/apache2/apache2.conf
 RUN echo "SetEnv AJP_firstname Max" >> /etc/apache2/apache2.conf
 RUN echo "SetEnv AJP_displayName 'Max Mustermann'" >> /etc/apache2/apache2.conf
 RUN echo "SetEnv AJP_HTTP_UID musterma" >> /etc/apache2/apache2.conf
-RUN echo "SetEnv AJP_Shib-Session-ID 'https://idp.dev/idp/shibboleth'" >> /etc/apache2/apache2.conf
+RUN echo "SetEnv AJP_Shib-Identity-Provider 'https://idp.dev/idp/shibboleth'" >> /etc/apache2/apache2.conf
