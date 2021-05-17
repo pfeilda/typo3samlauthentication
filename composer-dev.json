@@ -1,5 +1,5 @@
 {
-  "name": "daniel-pfeil/samlauthentication",
+  "name": "daniel-pfeil/samlauthentication-dev",
   "type": "typo3-cms-extension",
   "description": "This extension adds a authentication method for SAML with different service provider.",
   "keywords": [
@@ -13,7 +13,8 @@
   "version": "3.0.1",
   "require": {
     "typo3/minimal": ">=9",
-    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0"
+    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0",
+    "simplesamlphp/simplesamlphp": "^1.19"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",

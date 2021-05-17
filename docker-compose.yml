@@ -6,7 +6,7 @@ services:
       context: .
     user: "www-data:www-data"
     volumes:
-      - ./:/var/www/html/typo3conf/ext/samlauthentication:rw
+      - ./:/var/www/html/public/typo3conf/ext/samlauthentication:rw
     depends_on:
       - db
     ports:
