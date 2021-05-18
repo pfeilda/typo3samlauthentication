@@ -20,7 +20,7 @@
 $EM_CONF["samlauthentication"] = [
     'title' => 'SAML Authentication',
     'description' => 'This extension adds a authentication method for SAML with different service provider.',
-    'version' => '3.0.1',
+    'version' => '3.1.1',
     'category' => 'services',
     'constraints' => [
         'depends' => [

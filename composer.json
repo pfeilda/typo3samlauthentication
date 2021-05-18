@@ -10,15 +10,21 @@
     "serviceprovider"
   ],
   "license": "GPL-3.0-only",
-  "version": "3.0.1",
+  "version": "3.1.1",
   "require": {
     "typo3/minimal": ">=9",
-    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0"
+    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0",
+    "simplesamlphp/simplesamlphp": "^1.19"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
     "phpspec/phpspec": "*",
     "leanphp/phpspec-code-coverage": "*"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "introduction"
+    }
   },
   "autoload": {
     "psr-4": {

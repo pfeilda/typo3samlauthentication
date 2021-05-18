@@ -43,6 +43,8 @@ abstract class FactoryUtility
         if ($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH) {
             //apache shibd
             return new ApacheSamlUtility();
+        } else if(ServiceProviderType::SIMPLESAMLPHP) {
+            return new SimpleSAMLphpUtility();
         }
         return null;
     }
@@ -188,7 +190,7 @@ abstract class FactoryUtility
             ->from('tx_samlauthentication_domain_model_fieldmapping')
             ->execute()->fetchAll();
 
-        foreach ($fieldMappingsArray as $key => $value) {
+        foreach ($fieldMappingsArray as $value) {
             $fieldMapping = self::getFieldMappingFromArray($value);
             $objectStorage->attach($fieldMapping);
         }

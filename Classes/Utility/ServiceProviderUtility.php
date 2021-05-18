@@ -21,6 +21,8 @@ namespace DanielPfeil\Samlauthentication\Utility;
 
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
 use DanielPfeil\Samlauthentication\Enum\ServiceProviderType;
+use SimpleSAML\Session;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class ServiceProviderUtility
 {
@@ -64,9 +66,14 @@ class ServiceProviderUtility
 
     final private function getIdp(String $prefix, int $type): ?String
     {
-        $index = $prefix . "Shib-Identity-Provider";
         if ($type === ServiceProviderType::APACHE_SHIBBOLETH && isset($_SERVER[$index])) {
+            $index = $prefix . "Shib-Identity-Provider";
             return $_SERVER[$index];
+        }
+        else if($type === ServiceProviderType::SIMPLESAMLPHP){
+            $as = new \SimpleSAML\Auth\Simple('default-sp');
+            $as->requireAuth();
+            return $as->getAuthDataArray()["saml:sp:IdP"];
         }
         return null;
     }

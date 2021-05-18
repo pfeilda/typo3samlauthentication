@@ -66,6 +66,7 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['Apache2 Shibboleth SP', 1],
+                    ['SimpleSAMLphp SP', 2],
                 ],
                 'minitems' => 1,
                 'maxitems' => 1,
