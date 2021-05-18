@@ -15,16 +15,6 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class SimpleSAMLphpUtility implements SamlUtility
 {
-    public function getData(): array
-    {
-        // TODO: Implement getData() method.
-    }
-
-    public function isSessionExisting(): bool
-    {
-        // TODO: Implement isSessionExisting() method.
-    }
-
     public function getUserData(Serviceprovider $serviceprovider): array
     {
         $result = [];
@@ -98,16 +88,6 @@ class SimpleSAMLphpUtility implements SamlUtility
         }
         //todo make check
         return true;
-    }
-
-    public function getGroup(): array
-    {
-        // TODO: Implement getGroup() method.
-    }
-
-    public function getUserGroups($user)
-    {
-        // TODO: Implement getUserGroups() method.
     }
 
     private function getDataForTableMapping(Tablemapping $tablemapping, ?string $prefix): array
