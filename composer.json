@@ -10,10 +10,9 @@
     "serviceprovider"
   ],
   "license": "GPL-3.0-only",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "require": {
     "typo3/minimal": ">=9",
-    "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0",
     "simplesamlphp/simplesamlphp": "^1.19"
   },
   "require-dev": {
@@ -23,7 +22,7 @@
   },
   "extra": {
     "typo3/cms": {
-      "extension-key": "introduction"
+      "extension-key": "samlauthentication"
     }
   },
   "autoload": {

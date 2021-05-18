@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f2569efd99df7aa0000e5e09daf2ffc",
+    "content-hash": "d5cc9d4d9b5a80e2682b4d43e2101ce1",
     "packages": [
         {
             "name": "cogpowered/finediff",
@@ -60,96 +60,6 @@
                 "source": "https://github.com/cogpowered/FineDiff/tree/master"
             },
             "time": "2014-05-19T10:25:02+00:00"
-        },
-        {
-            "name": "daniel-pfeil/serviceprovider-apache-shib",
-            "version": "1.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pfeilda/serviceproviderApacheShib.git",
-                "reference": "3e3d51823bbb62e0d18cdc7a6aac71b076ccee59"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pfeilda/serviceproviderApacheShib/zipball/3e3d51823bbb62e0d18cdc7a6aac71b076ccee59",
-                "reference": "3e3d51823bbb62e0d18cdc7a6aac71b076ccee59",
-                "shasum": ""
-            },
-            "require": {
-                "daniel-pfeil/serviceprovider-authenticator": "^1.2",
-                "php": ">7.1"
-            },
-            "require-dev": {
-                "leanphp/phpspec-code-coverage": "^4.1",
-                "phpspec/phpspec": "^4.0",
-                "squizlabs/php_codesniffer": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DanielPfeil\\ServiceProviderApacheShib\\": "./Classes"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "description": "These package should make it available to authenticate with an apache2 shibboleth service provider.",
-            "keywords": [
-                "Authentication",
-                "SSO",
-                "apache2",
-                "saml",
-                "serviceprovider",
-                "shibboleth"
-            ],
-            "support": {
-                "issues": "https://github.com/pfeilda/serviceproviderApacheShib/issues",
-                "source": "https://github.com/pfeilda/serviceproviderApacheShib/tree/1.3.2"
-            },
-            "time": "2021-03-29T14:14:25+00:00"
-        },
-        {
-            "name": "daniel-pfeil/serviceprovider-authenticator",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pfeilda/serviceproviderAuthenticator.git",
-                "reference": "23cf942b560789ee43e97c16dc82f08c132fa593"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pfeilda/serviceproviderAuthenticator/zipball/23cf942b560789ee43e97c16dc82f08c132fa593",
-                "reference": "23cf942b560789ee43e97c16dc82f08c132fa593",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1"
-            },
-            "require-dev": {
-                "squizlabs/php_codesniffer": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DanielPfeil\\ServiceProviderAuthenticator\\": "./"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "description": "These package should give you a base frame for developing new authenticator that should be compatible.",
-            "keywords": [
-                "Authentication",
-                "SSO",
-                "saml"
-            ],
-            "support": {
-                "issues": "https://github.com/pfeilda/serviceproviderAuthenticator/issues",
-                "source": "https://github.com/pfeilda/serviceproviderAuthenticator/tree/1.2.1"
-            },
-            "time": "2019-04-23T12:01:51+00:00"
         },
         {
             "name": "doctrine/annotations",
