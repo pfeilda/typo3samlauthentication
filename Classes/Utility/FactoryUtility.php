@@ -112,6 +112,8 @@ abstract class FactoryUtility
         $fieldMapping->setField($fieldMappingArray["field"]);
         $fieldMapping->setForeignfield($fieldMappingArray["foreignfield"]);
         $fieldMapping->setIdentifier((bool)$fieldMappingArray["identifier"]);
+        $fieldMapping->setFallback((bool)$fieldMappingArray["fallback"]);
+        $fieldMapping->setDefaultvalue($fieldMappingArray["defaultvalue"]);
 
         return $fieldMapping;
     }
