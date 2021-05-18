@@ -12,18 +12,15 @@
   "license": "GPL-3.0-only",
   "version": "3.0.1",
   "require": {
-    "typo3/minimal": ">=9",
+    "typo3/minimal": "^9.1",
     "daniel-pfeil/serviceprovider-apache-shib": "^1.1.0",
-    "simplesamlphp/simplesamlphp": "^1.19"
+    "daniel-pfeil/samlauthentication": "*",
+    "simplesamlphp/simplesamlphp": "^1.19",
+    "typo3/cms-introduction": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
     "phpspec/phpspec": "*",
     "leanphp/phpspec-code-coverage": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "DanielPfeil\\Samlauthentication\\": "Classes/"
-    }
   }
 }
