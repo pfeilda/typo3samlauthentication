@@ -39,13 +39,13 @@ class ApacheSamlUtility implements SamlUtility
     public function getData(): array
     {
         // TODO: Implement getData() method.
-        return null;
+        return [];
     }
 
     public function isSessionExisting(): bool
     {
         // TODO: Implement isSessionExisting() method.
-        return null;
+        return [];
     }
 
     public function getUserData(Serviceprovider $serviceprovider): array

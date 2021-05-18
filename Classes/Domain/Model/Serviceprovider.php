@@ -187,10 +187,12 @@ class Serviceprovider extends AbstractEntity
     }
 
     /**
-     * @param string $prefix
+     * @param null|string $prefix
      */
-    public function setPrefix(string $prefix)
+    public function setPrefix(?string $prefix)
     {
+        if(is_null($prefix))
+            $prefix = "";
         $this->prefix = $prefix;
     }
 
