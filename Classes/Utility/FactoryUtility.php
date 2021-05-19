@@ -17,12 +17,6 @@
  *
  */
 
-/**
- * User: pfeilda
- * Date: 08.02.2018
- * Time: 22:09
- */
-
 namespace DanielPfeil\Samlauthentication\Utility;
 
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
@@ -33,7 +27,6 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 abstract class FactoryUtility
 {

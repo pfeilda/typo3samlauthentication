@@ -21,8 +21,6 @@ namespace DanielPfeil\Samlauthentication\Utility;
 
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
 use DanielPfeil\Samlauthentication\Enum\ServiceProviderType;
-use SimpleSAML\Session;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class ServiceProviderUtility
 {

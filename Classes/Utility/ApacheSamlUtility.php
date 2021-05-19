@@ -26,7 +26,6 @@ use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class ApacheSamlUtility implements SamlUtility
 {
@@ -104,7 +103,7 @@ class ApacheSamlUtility implements SamlUtility
         return true;
     }
 
-    final public function getDataForTableMapping(Tablemapping $tablemapping, string $prefix): array
+    private function getDataForTableMapping(Tablemapping $tablemapping, string $prefix): array
     {
         $result = [];
 
