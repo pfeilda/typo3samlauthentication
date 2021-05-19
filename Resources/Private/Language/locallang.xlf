@@ -21,6 +21,9 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2011-10-18T18:20:51Z" product-name="my-ext">
         <header/>
         <body>
+            <trans-unit id="login.simplesaml" xml:space="preserve">
+                <source>Simplesaml Login</source>
+            </trans-unit>
             <trans-unit id="fieldMapping" xml:space="preserve">
                 <source>Field mapping</source>
             </trans-unit>
