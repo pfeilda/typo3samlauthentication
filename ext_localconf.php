@@ -35,8 +35,6 @@
     ]
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SVCONF']['auth']['setup']['BE_fetchUserIfNoSession'] = true;
-
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['backend']['loginProviders'][1433416020] = [
     'provider' => \DanielPfeil\Samlauthentication\Backend\LoginProvider\SamlLoginProvider::class,
     'sorting' => 50,
