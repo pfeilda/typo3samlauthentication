@@ -41,14 +41,16 @@ return [
         ],
         'identityprovider' => [
             'exclude' => false,
-            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.identityprovider',
+            'label' =>
+                'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.identityprovider',
             'config' => [
                 'type' => 'input',
                 'eval' => 'trim,required',
             ],
         ],
         'destinationpid' => [
-            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.destinationpid',
+            'label' =>
+                'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.destinationpid',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',

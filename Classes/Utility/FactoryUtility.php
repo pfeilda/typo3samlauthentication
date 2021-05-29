@@ -36,7 +36,7 @@ abstract class FactoryUtility
         if ($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH) {
             //apache shibd
             return new ApacheSamlUtility();
-        } else if(ServiceProviderType::SIMPLESAMLPHP) {
+        } elseif (ServiceProviderType::SIMPLESAMLPHP) {
             return new SimpleSAMLphpUtility();
         }
         return null;
@@ -67,7 +67,8 @@ abstract class FactoryUtility
         return $serviceProvidersArray;
     }
 
-    private static function getServiceProviderObjectWithoutTablemappingFromArray(array $serviceProviderArray
+    private static function getServiceProviderObjectWithoutTablemappingFromArray(
+        array $serviceProviderArray
     ): Serviceprovider {
         $serviceProvider = new Serviceprovider();
 
@@ -113,7 +114,8 @@ abstract class FactoryUtility
         return $fieldMapping;
     }
 
-    private static function getTableMappingObjectStorageForServiceProvider(Serviceprovider $serviceprovider
+    private static function getTableMappingObjectStorageForServiceProvider(
+        Serviceprovider $serviceprovider
     ): ObjectStorage {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $objectStorage = $objectManager->get(ObjectStorage::class);

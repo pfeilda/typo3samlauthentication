@@ -85,12 +85,4 @@ class BackendUtility
         }
         return $connections;
     }
-
-    /**
-     * @param Fieldmapping[] $fieldMapping
-     */
-    private function saveValues(array $fieldMapping, Tablemapping $tablemapping): bool
-    {
-
-    }
 }

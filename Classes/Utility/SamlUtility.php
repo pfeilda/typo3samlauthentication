@@ -20,7 +20,6 @@
 namespace DanielPfeil\Samlauthentication\Utility;
 
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
-use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
 
 interface SamlUtility
 {

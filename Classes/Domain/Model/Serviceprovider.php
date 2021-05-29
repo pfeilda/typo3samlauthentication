@@ -66,7 +66,7 @@ class Serviceprovider extends AbstractEntity
     /**
      * @param int $uid
      */
-    public function setUid($uid)
+    public function setUid(int $uid)
     {
         if (!$this->uid && $uid > 0) {
             $this->uid = $uid;
@@ -190,8 +190,9 @@ class Serviceprovider extends AbstractEntity
      */
     public function setPrefix(?string $prefix)
     {
-        if(is_null($prefix))
+        if (is_null($prefix)) {
             $prefix = "";
+        }
         $this->prefix = $prefix;
     }
 

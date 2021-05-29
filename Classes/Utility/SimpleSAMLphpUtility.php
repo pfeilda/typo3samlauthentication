@@ -3,7 +3,6 @@
 
 namespace DanielPfeil\Samlauthentication\Utility;
 
-
 use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
 use DanielPfeil\Samlauthentication\Domain\Model\FieldValue;
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
@@ -105,8 +104,9 @@ class SimpleSAMLphpUtility implements SamlUtility
             $key = $prefix . $fieldValue->getForeignField();
             if (array_key_exists($key, $attributes)) {
                 $value = $attributes[$key];
-                if (is_array($value))
+                if (is_array($value)) {
                     $value = $value[0];
+                }
 
                 $fieldValue->setValue($value);
             } else {

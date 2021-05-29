@@ -19,7 +19,6 @@
 
 namespace DanielPfeil\Samlauthentication\Enum;
 
-
 class ServiceProviderContext
 {
     const FRONT_END = "FE";

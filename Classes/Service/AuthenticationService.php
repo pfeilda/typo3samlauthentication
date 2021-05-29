@@ -22,12 +22,17 @@ namespace DanielPfeil\Samlauthentication\Service;
 use DanielPfeil\Samlauthentication\Enum\AuthenticationStatus;
 use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
 use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\AbstractAuthenticationService
 {
     final public function authUser(array $user): int
     {
+        if (!$this->isResponsible()) {
+            return AuthenticationStatus::FAIL_CONTINUE;
+        }
+
         $serviceProviderUtility = ServiceProviderUtility::getInstance();
 
         $activeServiceProviders = $serviceProviderUtility->getActive(FactoryUtility::getServiceProviderModels());
@@ -51,12 +56,18 @@ final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\Abstrac
 
     final public function getUser()
     {
+        if (!$this->isResponsible()) {
+            return false;
+        }
+
         //todo check if parent is needed before or after?
         $user = parent::fetchUserRecord($this->login["uname"]);
         if (!$user) {
             try {
                 $serviceProviderUtility = ServiceProviderUtility::getInstance();
-                $activeServiceProviders = $serviceProviderUtility->getActive(FactoryUtility::getServiceProviderModels());
+                $activeServiceProviders = $serviceProviderUtility->getActive(
+                    FactoryUtility::getServiceProviderModels()
+                );
 
                 foreach ($activeServiceProviders as $activeServiceProvider) {
                     $samlComponent = FactoryUtility::getSAMLUtility($activeServiceProvider);
@@ -73,5 +84,17 @@ final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\Abstrac
             }
         }
         return $user;
+    }
+
+    private function isResponsible(): bool
+    {
+        if (GeneralUtility::_POST("login-provider") === "samlauthentication" &&
+            isset($this->login["uname"]) &&
+            isset($this->login["status"]) &&
+            $this->login["status"] === "login"
+        ) {
+            return true;
+        }
+        return false;
     }
 }

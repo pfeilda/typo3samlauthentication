@@ -10,12 +10,14 @@
     "serviceprovider"
   ],
   "license": "GPL-3.0-only",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "require": {
     "typo3/minimal": ">=9",
-    "simplesamlphp/simplesamlphp": "^1.19"
+    "simplesamlphp/simplesamlphp": "^1.19",
+    "ext-pdo": "*"
   },
   "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.0",
     "squizlabs/php_codesniffer": "*",
     "phpspec/phpspec": "*",
     "leanphp/phpspec-code-coverage": "*"
