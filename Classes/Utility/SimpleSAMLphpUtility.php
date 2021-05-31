@@ -7,6 +7,7 @@ use DanielPfeil\Samlauthentication\Domain\Model\Fieldmapping;
 use DanielPfeil\Samlauthentication\Domain\Model\FieldValue;
 use DanielPfeil\Samlauthentication\Domain\Model\Serviceprovider;
 use DanielPfeil\Samlauthentication\Domain\Model\Tablemapping;
+use DanielPfeil\Samlauthentication\Enum\ServiceProviderType;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -23,7 +24,7 @@ class SimpleSAMLphpUtility implements SamlUtility
         foreach ($serviceprovider->getTablemapping() as $tablemapping) {
             $result[$tablemapping->getTable()] = $this->getDataForTableMapping(
                 $tablemapping,
-                $serviceprovider->getPrefix()
+                $serviceprovider
             );
         }
 
@@ -38,7 +39,7 @@ class SimpleSAMLphpUtility implements SamlUtility
          * @var Tablemapping $tableMapping
          */
         foreach ($tableMappings as $tableMapping) {
-            $data = $this->getDataForTableMapping($tableMapping, $serviceprovider->getPrefix());
+            $data = $this->getDataForTableMapping($tableMapping, $serviceprovider);
 
             /**
              * @var QueryBuilder $queryBuilderFeUsers
@@ -88,36 +89,54 @@ class SimpleSAMLphpUtility implements SamlUtility
         return true;
     }
 
-    private function getDataForTableMapping(Tablemapping $tablemapping, ?string $prefix): array
+    private function getDataForTableMapping(Tablemapping $tablemapping, Serviceprovider $serviceprovider): array
     {
-        $as = new \SimpleSAML\Auth\Simple('default-sp');
+        $as = new \SimpleSAML\Auth\Simple($serviceprovider->getEntityid());
         $as->requireAuth();
         $attributes = $as->getAttributes();
 
         $result = [];
 
+        /**
+         * @var Fieldmapping $field
+         */
         foreach ($tablemapping->getFields() as $field) {
             $fieldValue = new FieldValue();
             $fieldValue->setField($field->getField());
-            $fieldValue->setForeignField($field->getForeignField());
 
-            $key = $prefix . $fieldValue->getForeignField();
-            if (array_key_exists($key, $attributes)) {
-                $value = $attributes[$key];
-                if (is_array($value)) {
-                    $value = $value[0];
-                }
-
-                $fieldValue->setValue($value);
+            if($field->isNoforeignfield()){
+                $fieldValue->setValue($field->getDefaultvalue());
             } else {
-                if ($field->hasFallback()) {
-                    $fieldValue->setValue($field->getDefaultvalue());
+                $fieldValue->setForeignField($field->getForeignField());
+
+                $key = $this->getPrefixIfExistOrEmptyString($serviceprovider) . $fieldValue->getForeignField();
+                if (array_key_exists($key, $attributes)) {
+                    $value = $attributes[$key];
+                    if (is_array($value)) {
+                        $value = $value[0];
+                    }
+
+                    $fieldValue->setValue($value);
+                } else {
+                    if ($field->hasFallback()) {
+                        $fieldValue->setValue($field->getDefaultvalue());
+                    }
                 }
             }
+
 
             $result[$field->getField()] = $fieldValue;
         }
 
         return $result;
+    }
+
+    private function getPrefixIfExistOrEmptyString(Serviceprovider $serviceprovider): string
+    {
+        if($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH){
+            return  $serviceprovider->getPrefix();
+        }
+
+        return '';
     }
 }

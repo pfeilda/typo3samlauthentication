@@ -57,8 +57,9 @@ return [
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping.foreignfield',
             'config' => [
                 'type' => 'input',
-                'eval' => 'trim,required',
+                'eval' => 'trim',
             ],
+            'displayCond' => 'FIELD:noforeignfield:!=:1',
         ],
         'identifier' => [
             'exclude' => false,
@@ -71,6 +72,20 @@ return [
                     ],
                 ],
             ],
+            'displayCond' => 'FIELD:noforeignfield:!=:1',
+        ],
+        'noforeignfield' => [
+            'exclude' => false,
+            'label' => 'No foreign field',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    '1' => [
+                        '0' => 'No foreign field',
+                    ],
+                ],
+            ],
+            'onChange' => 'reload',
         ],
         //stupid name but mysql doesnt accept default
         'fallback' => [
@@ -80,10 +95,11 @@ return [
                 'type' => 'check',
                 'items' => [
                     '1' => [
-                        '0' => 'Benutze Defaultwert',
+                        '0' => 'Use default value',
                     ],
                 ],
             ],
+            'displayCond' => 'FIELD:noforeignfield:!=:1',
             'onChange' => 'reload',
         ],
         'defaultvalue' => [
@@ -92,7 +108,12 @@ return [
             'config' => [
                 'type' => 'input',
             ],
-            'displayCond' => 'FIELD:fallback:=:1',
+            'displayCond' => [
+                'OR' => [
+                    'FIELD:fallback:=:1',
+                    'FIELD:noforeignfield:=:1'
+                ]
+            ]
         ],
     ],
     'palettes' => [
@@ -106,7 +127,7 @@ return [
         '0' => [
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    field,foreignfield,identifier,fallback,defaultvalue,
+                    field,noforeignfield,foreignfield,identifier,fallback,defaultvalue,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     ',

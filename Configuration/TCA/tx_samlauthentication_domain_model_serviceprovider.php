@@ -84,6 +84,15 @@ return [
             ],
             'displayCond' => 'FIELD:type:=:1',
         ],
+        'entityid' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.entityid',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
+            ],
+            'displayCond' => 'FIELD:type:=:2',
+        ],
         'context' => [
             'exclude' => false,
             'label' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:serviceProvider.context',
@@ -93,7 +102,7 @@ return [
                 'items' => [
                     ['Frontend', 'FE'],
                     ['Backend', 'BE'],
-                    ['Frontend and Backend', 'FB'],
+                    ['Frontend and Backend (deprecated)', 'FB'],
                 ],
                 'minitems' => 1,
                 'maxitems' => 1,
@@ -133,7 +142,7 @@ return [
         '0' => [
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                    title,type,identityprovider,prefix,context,tablemapping,destinationpid,
+                    title,type,identityprovider,prefix,entityid,context,tablemapping,destinationpid,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                     --palette--;;hidden,
                     ',

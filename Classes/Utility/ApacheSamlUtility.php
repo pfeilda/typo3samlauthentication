@@ -110,17 +110,20 @@ class ApacheSamlUtility implements SamlUtility
         foreach ($tablemapping->getFields() as $field) {
             $fieldValue = new FieldValue();
             $fieldValue->setField($field->getField());
-            $fieldValue->setForeignField($field->getForeignField());
-
-            $key = $prefix . $fieldValue->getForeignField();
-            if (array_key_exists($key, $_SERVER)) {
-                $fieldValue->setValue($_SERVER[$key]);
+            if($field->isNoforeignfield()){
+                $fieldValue->setValue($field->getDefaultvalue());
             } else {
-                if ($field->hasFallback()) {
-                    $fieldValue->setValue($field->getDefaultvalue());
+                $fieldValue->setForeignField($field->getForeignField());
+
+                $key = $prefix . $fieldValue->getForeignField();
+                if (array_key_exists($key, $_SERVER)) {
+                    $fieldValue->setValue($_SERVER[$key]);
+                } else {
+                    if ($field->hasFallback()) {
+                        $fieldValue->setValue($field->getDefaultvalue());
+                    }
                 }
             }
-
             $result[$field->getField()] = $fieldValue;
         }
 

@@ -33,6 +33,10 @@ class FieldValue
      * @var string
      */
     private $foreignField;
+    /**
+     * @var boolean
+     */
+    private $noForeignField;
 
     /**
      * @return string|null
@@ -81,4 +85,21 @@ class FieldValue
     {
         $this->foreignField = $foreignField;
     }
+
+    /**
+     * @return bool
+     */
+    public function isNoForeignField(): bool
+    {
+        return $this->noForeignField;
+    }
+
+    /**
+     * @param bool $noForeignField
+     */
+    public function setNoForeignField(bool $noForeignField): void
+    {
+        $this->noForeignField = $noForeignField;
+    }
+
 }

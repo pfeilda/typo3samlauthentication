@@ -32,6 +32,10 @@ class Fieldmapping extends AbstractEntity
      */
     protected $field = "";
     /**
+     * @var boolean
+     */
+    protected $noforeignfield = false;
+    /**
      * @var string
      */
     protected $foreignfield = "";
@@ -80,6 +84,22 @@ class Fieldmapping extends AbstractEntity
     public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNoforeignfield(): bool
+    {
+        return $this->noforeignfield;
+    }
+
+    /**
+     * @param bool $noforeignfield
+     */
+    public function setNoforeignfield(bool $noforeignfield): void
+    {
+        $this->noforeignfield = $noforeignfield;
     }
 
     /**

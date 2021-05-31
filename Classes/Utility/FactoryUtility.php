@@ -80,6 +80,7 @@ abstract class FactoryUtility
         $serviceProvider->setDestinationpid($serviceProviderArray["destinationpid"]);
         $serviceProvider->setType($serviceProviderArray["type"]);
         $serviceProvider->setPrefix($serviceProviderArray["prefix"]);
+        $serviceProvider->setEntityid($serviceProviderArray["entityid"]);
         $serviceProvider->setIdentityprovider($serviceProviderArray["identityprovider"]);
         $serviceProvider->setContext($serviceProviderArray["context"]);
 
@@ -106,6 +107,7 @@ abstract class FactoryUtility
         $fieldMapping->setPid($fieldMappingArray["pid"]);
         $fieldMapping->setHidden($fieldMappingArray["hidden"]);
         $fieldMapping->setField($fieldMappingArray["field"]);
+        $fieldMapping->setNoforeignfield($fieldMappingArray["noforeignfield"]);
         $fieldMapping->setForeignfield($fieldMappingArray["foreignfield"]);
         $fieldMapping->setIdentifier((bool)$fieldMappingArray["identifier"]);
         $fieldMapping->setFallback((bool)$fieldMappingArray["fallback"]);

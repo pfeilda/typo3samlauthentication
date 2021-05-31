@@ -54,6 +54,10 @@ class Serviceprovider extends AbstractEntity
      */
     protected $prefix = "";
     /**
+     * @var string
+     */
+    protected $entityid = "";
+    /**
      * @var ObjectStorage<Tablemapping>
      */
     protected $tablemapping = null;
@@ -194,6 +198,22 @@ class Serviceprovider extends AbstractEntity
             $prefix = "";
         }
         $this->prefix = $prefix;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntityid(): string
+    {
+        return $this->entityid;
+    }
+
+    /**
+     * @param string $entityid
+     */
+    public function setEntityid(string $entityid): void
+    {
+        $this->entityid = $entityid;
     }
 
     /**

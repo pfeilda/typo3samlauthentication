@@ -50,8 +50,7 @@ class ServiceProviderUtility
         $active = [];
         foreach ($serviceProviders as $serviceProvider) {
             if (!$serviceProvider->isHidden()) {
-                $prefix = $serviceProvider->getPrefix();
-                $idp = $this->getIdp($prefix, $serviceProvider->getType());
+                $idp = $this->getIdp($serviceProvider);
                 if ($idp == $serviceProvider->getIdentityprovider()) {
                     if (TYPO3_MODE === $serviceProvider->getContext() || "FB" === $serviceProvider->getContext()) {
                         $active[] = $serviceProvider;
@@ -62,13 +61,18 @@ class ServiceProviderUtility
         return $active;
     }
 
-    final private function getIdp(String $prefix, int $type): ?String
+    private function getIdp(Serviceprovider $serviceprovider): ?String
     {
-        $index = $prefix . "Shib-Identity-Provider";
-        if ($type === ServiceProviderType::APACHE_SHIBBOLETH && isset($_SERVER[$index])) {
+        $index = $serviceprovider->getPrefix() . "Shib-Identity-Provider";
+        if ($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH && isset($_SERVER[$index])) {
             return $_SERVER[$index];
-        } elseif ($type === ServiceProviderType::SIMPLESAMLPHP) {
-            $as = new \SimpleSAML\Auth\Simple('default-sp');
+        } elseif ($serviceprovider->getType() === ServiceProviderType::SIMPLESAMLPHP) {
+            $entityId = $serviceprovider->getEntityid();
+            if(!$entityId){
+                return null;
+            }
+
+            $as = new \SimpleSAML\Auth\Simple($entityId);
             $as->requireAuth();
             return $as->getAuthDataArray()["saml:sp:IdP"];
         }

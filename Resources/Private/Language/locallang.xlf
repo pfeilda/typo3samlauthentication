@@ -54,6 +54,9 @@
             <trans-unit id="serviceProvider.prefix" xml:space="preserve">
                 <source>Prefix</source>
             </trans-unit>
+            <trans-unit id="serviceProvider.entityid" xml:space="preserve">
+                <source>SP EntityID</source>
+            </trans-unit>
             <trans-unit id="serviceProvider.context" xml:space="preserve">
                 <source>Context</source>
             </trans-unit>
