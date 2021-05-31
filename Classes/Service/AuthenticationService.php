@@ -22,11 +22,14 @@ namespace DanielPfeil\Samlauthentication\Service;
 use DanielPfeil\Samlauthentication\Enum\AuthenticationStatus;
 use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
 use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
+use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\AbstractAuthenticationService
 {
+    use LoggerAwareTrait;
+
     final public function authUser(array $user): int
     {
         if (!$this->isResponsible()) {
@@ -79,8 +82,9 @@ final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\Abstrac
 
                 $user = parent::fetchUserRecord($this->login["uname"]);
             } catch (\Exception $exception) {
-                //TODO implement
                 DebuggerUtility::var_dump($exception);
+
+                $this->logger->error('Session start with secure cookie not allowed on http.');
             }
         }
         return $user;
