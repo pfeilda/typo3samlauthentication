@@ -1,0 +1,1 @@
+plugin.tx_felogin_pi1.templateFile = EXT:samlauthentication/Resources/Private/Templates/Felogin/FrontendLogin.html
