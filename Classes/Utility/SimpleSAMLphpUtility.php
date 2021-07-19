@@ -60,7 +60,7 @@ class SimpleSAMLphpUtility implements SamlUtility
             }
 
             $findUser = $queryBuilderFeUsers
-                ->count('*')
+                ->select('uid')
                 ->from($tableMapping->getTable());
             /**
              * @var Fieldmapping $field
@@ -76,13 +76,27 @@ class SimpleSAMLphpUtility implements SamlUtility
                 }
             }
 
-            $userExists = $findUser->execute()->fetch()['COUNT(*)'];
-            if ($userExists === 0) {
+            $uid = $findUser->execute()->fetchAssociative()['uid'] ?? null;
+            if ($uid === 0) {
                 $result = $queryBuilderFeUsers->insert($tableMapping->getTable())
                     ->values($values)
                     ->execute();
             } else {
-                //todo implement update
+                $result = $queryBuilderFeUsers->update($tableMapping->getTable())
+                    ->update($tableMapping->getTable())
+                    ->where(
+                        $queryBuilderFeUsers->expr()
+                            ->eq(
+                                'uid',
+                                $queryBuilderFeUsers->createNamedParameter($uid, \PDO::PARAM_INT, 'uid')
+                            )
+                    );
+
+                foreach ($values as $key => $value) {
+                    $result->set($key, $value);
+                }
+
+                $result->execute();
             }
         }
         //todo make check
@@ -104,7 +118,7 @@ class SimpleSAMLphpUtility implements SamlUtility
             $fieldValue = new FieldValue();
             $fieldValue->setField($field->getField());
 
-            if($field->isNoforeignfield()){
+            if ($field->isNoforeignfield()) {
                 $fieldValue->setValue($field->getDefaultvalue());
             } else {
                 $fieldValue->setForeignField($field->getForeignField());
@@ -133,7 +147,7 @@ class SimpleSAMLphpUtility implements SamlUtility
 
     private function getPrefixIfExistOrEmptyString(Serviceprovider $serviceprovider): string
     {
-        if($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH){
+        if ($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH) {
             return  $serviceprovider->getPrefix();
         }
 

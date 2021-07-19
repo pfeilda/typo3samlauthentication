@@ -24,7 +24,6 @@ use DanielPfeil\Samlauthentication\Utility\FactoryUtility;
 use DanielPfeil\Samlauthentication\Utility\ServiceProviderUtility;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\AbstractAuthenticationService
 {
@@ -62,31 +61,26 @@ final class AuthenticationService extends \TYPO3\CMS\Core\Authentication\Abstrac
         if (!$this->isResponsible()) {
             return false;
         }
+        
+        try {
+            $serviceProviderUtility = ServiceProviderUtility::getInstance();
+            $activeServiceProviders = $serviceProviderUtility->getActive(
+                FactoryUtility::getServiceProviderModels()
+            );
 
-        //todo check if parent is needed before or after?
-        $user = parent::fetchUserRecord($this->login["uname"]);
-        if (!$user) {
-            try {
-                $serviceProviderUtility = ServiceProviderUtility::getInstance();
-                $activeServiceProviders = $serviceProviderUtility->getActive(
-                    FactoryUtility::getServiceProviderModels()
-                );
-
-                foreach ($activeServiceProviders as $activeServiceProvider) {
-                    $samlComponent = FactoryUtility::getSAMLUtility($activeServiceProvider);
-                    $storedSuccessfull = $samlComponent->saveUserData($activeServiceProvider);
-                    if ($storedSuccessfull) {
-                        break;
-                    }
+            foreach ($activeServiceProviders as $activeServiceProvider) {
+                $samlComponent = FactoryUtility::getSAMLUtility($activeServiceProvider);
+                $storedSuccessfull = $samlComponent->saveUserData($activeServiceProvider);
+                if ($storedSuccessfull) {
+                    break;
                 }
-
-                $user = parent::fetchUserRecord($this->login["uname"]);
-            } catch (\Exception $exception) {
-                DebuggerUtility::var_dump($exception);
-
-                $this->logger->error('Session start with secure cookie not allowed on http.');
             }
+
+            $user = parent::fetchUserRecord($this->login["uname"]);
+        } catch (\Exception $exception) {
+            $this->logger->error($exception->getMessage());
         }
+
         return $user;
     }
 
