@@ -12,7 +12,7 @@
   "license": "GPL-3.0-only",
   "version": "4.1.2",
   "require": {
-    "typo3/minimal": ">=9",
+    "typo3/minimal": ">=10",
     "simplesamlphp/simplesamlphp": "^1.19",
     "ext-pdo": "*"
   },
