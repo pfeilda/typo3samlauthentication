@@ -10,7 +10,7 @@
     "serviceprovider"
   ],
   "license": "GPL-3.0-only",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "require": {
     "typo3/minimal": ">=10",
     "simplesamlphp/simplesamlphp": "^1.19",
