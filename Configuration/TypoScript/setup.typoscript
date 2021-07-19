@@ -1,1 +1,1 @@
-plugin.tx_felogin_pi1.templateFile = EXT:samlauthentication/Resources/Private/Templates/Felogin/FrontendLogin.html
+plugin.tx_felogin_login.view.templateRootPaths.20 = EXT:samlauthentication/Resources/Private/Templates
