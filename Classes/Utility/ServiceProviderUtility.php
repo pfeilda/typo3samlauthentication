@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Copyright (C) 2018  Daniel Pfeil <daniel.pfeil@itpfeil.de
  *
@@ -24,9 +25,6 @@ use DanielPfeil\Samlauthentication\Enum\ServiceProviderType;
 
 class ServiceProviderUtility
 {
-    private function __construct()
-    {
-    }
 
     /**
      * @var ServiceProviderUtility
@@ -47,6 +45,7 @@ class ServiceProviderUtility
      */
     final public function getActive(array $serviceProviders): array
     {
+
         $active = [];
         foreach ($serviceProviders as $serviceProvider) {
             if (!$serviceProvider->isHidden()) {
@@ -61,12 +60,14 @@ class ServiceProviderUtility
         return $active;
     }
 
-    private function getIdp(Serviceprovider $serviceprovider): ?String
+    protected function getIdp(Serviceprovider $serviceprovider): ?String
     {
         $index = $serviceprovider->getPrefix() . "Shib-Identity-Provider";
         if ($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH && isset($_SERVER[$index])) {
             return $_SERVER[$index];
-        } elseif ($serviceprovider->getType() === ServiceProviderType::SIMPLESAMLPHP) {
+        }
+
+        if ($serviceprovider->getType() === ServiceProviderType::SIMPLESAMLPHP) {
             $entityId = $serviceprovider->getEntityid();
             if(!$entityId){
                 return null;
