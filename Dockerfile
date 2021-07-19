@@ -1,15 +1,24 @@
-FROM typo3-docker
+FROM danipfeil/typo3-docker
 
 COPY composer-dev.json /var/www/html/composer.json
-RUN composer install
+#RUN composer install -n
+RUN composer update -n
 RUN ln -s ../vendor/simplesamlphp/simplesamlphp/www public/simplesaml
 RUN touch /var/www/html/public/FIRST_INSTALL
 RUN chown -R www-data.www-data /var/www/html
+
+RUN pecl install xdebug-2.9.8
+RUN docker-php-ext-enable xdebug
 
 RUN cp $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/conf.d/php.ini
 RUN echo "memory_limit = 2G" >> $PHP_INI_DIR/conf.d/typo3.ini
 RUN echo "max_execution_time=240" >> $PHP_INI_DIR/conf.d/typo3.ini
 RUN echo "max_input_vars=1500" >> $PHP_INI_DIR/conf.d/typo3.ini
+RUN echo "xdebug.mode=debug" >> $PHP_INI_DIR/conf.d/typo3.ini
+RUN echo "xdebug.remote_enable=on" >> $PHP_INI_DIR/conf.d/typo3.ini
+RUN echo "xdebug.remote_host=docker.for.mac.localhost" >> $PHP_INI_DIR/conf.d/typo3.ini
+RUN echo "xdebug.remote_autostart=true" >> $PHP_INI_DIR/conf.d/typo3.ini
+RUN echo "xdebug.force_display_errors=1" >> $PHP_INI_DIR/conf.d/typo3.ini
 
 RUN mkdir -p /var/www/html/simplesamlconfig/cert
 RUN openssl req -batch -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem
