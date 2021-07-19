@@ -1,2 +1,5 @@
 # cat=basic/enable; type=boolean; label=If active the debugMode is enabled:
 debugMode =
+
+# cat=basic/enable; type=string; label=SimpleSAML SP
+logoutServiceProvider =

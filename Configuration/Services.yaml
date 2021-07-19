@@ -1,0 +1,6 @@
+services:
+  DanielPfeil\Samlauthentication\EventListener\LogoutSaml:
+    tags:
+      - name: event.listener
+        identifier: 'myAdditionalPropertiesForPerson'
+        event: TYPO3\CMS\FrontendLogin\Event\LogoutConfirmedEvent
