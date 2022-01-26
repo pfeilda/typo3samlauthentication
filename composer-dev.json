@@ -19,8 +19,8 @@
     "typo3/cms-introduction": "*"
   },
   "require-dev": {
-//    "squizlabs/php_codesniffer": "*",
-//    "phpspec/phpspec": "*",
-//    "leanphp/phpspec-code-coverage": "*"
+    "squizlabs/php_codesniffer": "*",
+    "phpspec/phpspec": "*",
+    "leanphp/phpspec-code-coverage": "*"
   }
 }
