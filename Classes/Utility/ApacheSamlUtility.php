@@ -102,7 +102,7 @@ class ApacheSamlUtility implements SamlUtility
                         $queryBuilderFeUsers->expr()
                             ->eq(
                                 'uid',
-                                $queryBuilderFeUsers->createNamedParameter($uid, \PDO::PARAM_INT, 'uid')
+                                $queryBuilderFeUsers->createNamedParameter($uid, \PDO::PARAM_INT, ':uid')
                             )
                     );
 
