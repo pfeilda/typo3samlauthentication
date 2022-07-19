@@ -91,7 +91,7 @@ class ApacheSamlUtility implements SamlUtility
             }
 
             $uid = $findUser->execute()->fetchAssociative()['uid'] ?? null;
-            if ($uid === 0) {
+            if (!$uid) {
                 $result = $queryBuilderFeUsers->insert($tableMapping->getTable())
                     ->values($values)
                     ->execute();
