@@ -62,7 +62,7 @@ class ServiceProviderUtility
 
     protected function getIdp(Serviceprovider $serviceprovider): ?String
     {
-        $index = $serviceprovider->getPrefix() . "Shib-Identity-Provider";
+        $index = $serviceprovider->getPrefix() . "Identity-Provider";
         if ($serviceprovider->getType() === ServiceProviderType::APACHE_SHIBBOLETH && isset($_SERVER[$index])) {
             return $_SERVER[$index];
         }
