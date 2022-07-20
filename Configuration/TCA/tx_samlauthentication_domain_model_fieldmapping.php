@@ -21,7 +21,7 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:samlauthentication/Resources/Private/Language/locallang.xlf:fieldMapping',
         'label' => 'field',
-        'iconfile' => 'EXT:samlauthentication/Exticon.svg',
+        'iconfile' => 'EXT:samlauthentication/Resources/Public/Icons/Extension.svg',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'table ASC',
